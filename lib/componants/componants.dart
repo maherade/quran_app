@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/styles/color_manager.dart';
 
-AppBar defaultAppBar({required String title,isSideMenuShawn = false}) {
+AppBar defaultAppBar({required BuildContext context, required String title,isSideMenuShawn = false}) {
   return AppBar(
     iconTheme: const IconThemeData(color: Colors.black),
-    backgroundColor: ColorManager.primaryColor,
+    backgroundColor: ColorManager.lightColor2,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(20),
@@ -13,7 +13,9 @@ AppBar defaultAppBar({required String title,isSideMenuShawn = false}) {
 
       ),
       centerTitle: true,
-      title: Text(title,style: const TextStyle(fontSize: 25,color: Colors.black),),
+      title: Text(title,style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+        color: Colors.black,
+      )),
       leading: isSideMenuShawn?Builder(
         builder: (context) {
           return InkWell(

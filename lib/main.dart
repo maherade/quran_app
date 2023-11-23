@@ -6,6 +6,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:islami_app/business_logic/app_cubit/app_cubit.dart';
 import 'package:islami_app/utiles/local/cash_helper.dart';
 import 'package:islami_app/utiles/remote/audio_dio_helper.dart';
+import 'package:islami_app/utiles/remote/tafseer_dio_helper.dart';
 import 'business_logic/localization_cubit/app_localization.dart';
 import 'business_logic/localization_cubit/localization_cubit.dart';
 import 'business_logic/localization_cubit/localization_states.dart';
@@ -16,6 +17,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CashHelper.init();
   await DioHelper.dioInit();
+  await TafseerDioHelper.dioInit();
   await AudioDioHelper.dioInit();
   runApp(const MyApp());
 }
@@ -28,44 +30,32 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
-  void initState(){
+  void initState() {
     FlutterNativeSplash.remove();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (BuildContext context) =>
-            AppCubit()
+            create: (BuildContext context) => AppCubit()
               ..getSurah()
-
+              // ..getAudio()
         ),
         BlocProvider(
             create: (BuildContext context) =>
-            LocalizationCubit()
-              ..fetchLocalization()),
-
+                LocalizationCubit()..fetchLocalization()),
       ],
       child: BlocConsumer<LocalizationCubit, LocalizationStates>(
-        listener: (context, state) {
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              // appBarTheme: const AppBarTheme(
-              //   systemOverlayStyle: SystemUiOverlayStyle(
-              //     statusBarIconBrightness: Brightness.dark,
-              //     statusBarColor: ColorManager.white,
-              //   ),
-              // ),
-            ),
             home: const SplashScreen(),
-            localizationsDelegates:   const [
+            localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
@@ -93,4 +83,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-

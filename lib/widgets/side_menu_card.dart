@@ -31,7 +31,9 @@ class SideMenuCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(fontSize: 23, color: Colors.black),
+                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    color: Colors.black,
+                  ),
                 ),
                 const SizedBox(
                   width: 5,

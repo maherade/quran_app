@@ -1,16 +1,15 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:islami_app/data/models/audio/AudioModel.dart';
+import 'package:islami_app/data/models/audio_model/AudioModel.dart';
 import 'package:islami_app/data/models/azkar/azkar_alsabah/azkar_alsabah.dart';
-import 'package:islami_app/presentation/screens/audio_screen/audio_screen.dart';
-import 'package:islami_app/presentation/screens/tafseer_screen/tafseer_screen.dart';
+import 'package:islami_app/data/models/tafseer_model/TafseerModel.dart';
 import 'package:islami_app/utiles/remote/azkar_dio_helper.dart';
 import 'package:islami_app/utiles/remote/dio_helper.dart';
+import 'package:islami_app/utiles/remote/tafseer_dio_helper.dart';
 import 'package:meta/meta.dart';
 import 'package:islami_app/data/models/surah_details_model/surah_details_model.dart';
 import '../../data/models/surah_model/surahModel.dart';
-import '../../utiles/remote/audio_dio_helper.dart';
 
 part 'app_state.dart';
 
@@ -18,13 +17,6 @@ class AppCubit extends Cubit<AppState> {
   AppCubit() : super(InitialState());
 
   static AppCubit get(context) => BlocProvider.of(context);
-
-  int currentIndex = 0;
-  List<Widget> tabs = [
-    // ReadingScreen(index: ,),
-    const AudioScreen(),
-    const TafseerScreen(),
-  ];
 
   SurahModel? surahModel;
   List<Data>? surahNames = [];
@@ -49,7 +41,8 @@ class AppCubit extends Cubit<AppState> {
   }
 
   SurahDetailsModel? surahDetailsModel;
-  List<Ayahs>? ayahContent = [];
+  List<AyahsModel>? ayahContent = [];
+
   Future<void> getAyah(int index) async {
     ayahContent = [];
     emit(GetAyahLoadingState());
@@ -58,7 +51,7 @@ class AppCubit extends Cubit<AppState> {
     ).then((value) {
       print("-----------------------------$value");
       surahDetailsModel = SurahDetailsModel.fromJson(value.data);
-      surahDetailsModel!.data!.ayahs!.forEach((element) {
+      surahDetailsModel!.data!.ayahsModel!.forEach((element) {
         ayahContent!.add(element);
       });
       print("************${ayahContent![index]}");
@@ -70,6 +63,7 @@ class AppCubit extends Cubit<AppState> {
   }
 
   Azkar? azkarAlsabah;
+
   Future<void> getZekr(String dekr) async {
     emit(GetZekrLoadingState());
     AzkarDioHelper.getData(
@@ -88,37 +82,123 @@ class AppCubit extends Cubit<AppState> {
   final player = AudioPlayer();
 
   bool changePlay(String url) {
-    if(play==false){
+    if (play == false) {
       player.play(UrlSource(url));
       emit(ChangePlayState());
-      return play=true;
-    }else{
+      return play = true;
+    } else {
       player.stop();
       emit(ChangePlayState());
-      return play=false;
+      return play = false;
     }
   }
 
   AudioModel? audioModel;
-  List<AudioFiles>? audioFiles = [];
-  Future<void> getAudio(int chapterId) async {
-    audioFiles = [];
-    if (audioModel != null) {
-      emit(GetAudioSuccessState());
-    } else {
-      await AudioDioHelper.getData(
-        url: '/v4/chapter_recitations/1',
-      ).then((value) {
-        audioModel = AudioModel.fromJson(value.data);
-        if (audioModel!.audioFiles != null) {
-          audioModel!.audioFiles!.forEach((element) {
-            audioFiles!.add(element);
-          });
-          emit(GetAudioSuccessState());
-        } else {
-          emit(GetAudioErrorState());
-        }
+  List<Surahs>? audioContent = [];
+
+  Future<dynamic> getAudio() async {
+    audioContent=[];
+    emit(GetAudioLoadingState());
+    await DioHelper.getData(
+      url: '/quran/ar.alafasy',
+    ).then((value) {
+      print("-----------------------------${value.data}");
+      audioModel = AudioModel.fromJson(value.data!);
+      // audioContent=value.data!;
+      value.data.forEach((element) {
+        audioContent!.add(element);
+        print("--------------------**---------${element}");
       });
-    }
+      emit(GetAudioSuccessState());
+      // if (audioModel!.audioData != null) {
+      //   audioModel!.audioData!.surahs!.forEach((element) {
+      //     audioContent!.add(element);
+      //   });
+      //   emit(GetAudioSuccessState());
+      // } else {
+      //   emit(GetAudioErrorState());
+      // }
+    }).catchError((onError) {
+      emit(GetAudioErrorState());
+      print(onError.toString());
+    });
   }
+
+  TafseerModel? tafseerModel;
+  List<TafseerModel> tafseerContent = [];
+
+  Future<dynamic> getTafseer(
+      {required int? tafseerId,
+      required int? suraNumber,
+      required int? ayahNumber}) async {
+    tafseerContent = [];
+    emit(GetTafseerLoadingState());
+
+    await TafseerDioHelper.getData(
+      url: '/$tafseerId/$suraNumber/$ayahNumber',
+    ).then((value) {
+      try {
+        emit(GetTafseerSuccessState());
+        print("value.data-----------------------------${value.data}");
+        tafseerModel = TafseerModel.fromJson(value.data!);
+        tafseerContent=value.data!;
+        // (value.data)!.forEach((element) {
+        //   tafseerContent!.toList().add(TafseerModel.fromJson(element));
+        //   emit(GetTafseerSuccessState());
+        //   print("-----------------------------${tafseerContent![0].text}");
+        // });
+      } catch (e) {
+        emit(GetTafseerErrorState());
+        print("*****${e.toString()}");
+      }
+    }).catchError((onError) {
+      emit(GetTafseerErrorState());
+      print("***${onError.toString()}");
+    });
+
+    // emit(GetTafseerLoadingState());
+    // await TafseerDioHelper.getData(
+    //   url: '/$tafseerId/$suraNumber/$ayahNumber',
+    // ).then((value) {
+    //   try {
+    //     emit(GetTafseerSuccessState());
+    //     print("-----------------------------${value.data}");
+    //     tafseerModel = TafseerModel.fromJson(value);
+    //     value.data.forEach((element) {
+    //       tafseerContent!.add(TafseerModel.fromJson(element.data()));
+    //       emit(GetTafseerSuccessState());
+    //       print("-----------------------------${tafseerContent![0].text}");
+    //     });
+    //   } catch (e) {
+    //     emit(GetTafseerErrorState());
+    //     print("*****${e.toString()}");
+    //   }
+    // }).catchError((onError) {
+    //   emit(GetTafseerErrorState());
+    //   print("***${onError.toString()}");
+    // });
+  }
+
+// AudioModel? audioModel;
+// List<AudioFiles>? audioFiles = [];
+// Future<void> getAudio() async {
+//   audioFiles = [];
+//   if (audioModel != null) {
+//     emit(GetAudioSuccessState());
+//   } else {
+//     await AudioDioHelper.getData(
+//       url: '/v4/chapter_recitations/1',
+//     ).then((value) {
+//       audioModel = AudioModel.fromJson(value.data);
+//       if (audioModel!.audioFiles != null) {
+//         audioModel!.audioFiles!.forEach((element) {
+//           audioFiles!.add(element);
+//         });
+//         emit(GetAudioSuccessState());
+//       } else {
+//         emit(GetAudioErrorState());
+//       }
+//     });
+//   }
+// }
 }

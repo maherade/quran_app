@@ -3,22 +3,24 @@ import 'package:islami_app/business_logic/app_cubit/app_cubit.dart';
 
 class SurahContentWidget extends StatelessWidget {
   int index;
-    SurahContentWidget({required this.index, super.key});
+  Function() onTap;
+    SurahContentWidget({required this.onTap, required this.index, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Wrap(children: [
-        Center(
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
           child: Text(
-            '${AppCubit.get(context).ayahContent![index].text} ${{
-              index+1}}',
+            '${AppCubit.get(context).ayahContent![index].text!.split("\n").join()} ${{
+            AppCubit.get(context).ayahContent![index].numberInSurah}}',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.black),
+            style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: Colors.black),
           ),
         ),
-      ]),
+      ),
     );
   }
 }

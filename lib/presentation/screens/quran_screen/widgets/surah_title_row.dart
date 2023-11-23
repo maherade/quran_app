@@ -33,18 +33,26 @@ class SurahTitleRow extends StatelessWidget {
                 children: [
                   Text(
                     cubit.surahModel!.data![index].name!,
-                    style: const TextStyle(color: Colors.black, fontSize: 20),
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                      color: Colors.black,
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      const Text(
+                        Text(
                         "عدد الآيات ",
-                        style: TextStyle(color: Colors.black, fontSize: 15),
+                        style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
                       ),
                       Text(
                         "(${cubit.surahModel!.data![index].numberOfAyahs!})",
-                        style: const TextStyle(color: Colors.black, fontSize: 12),
+                        style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                          fontSize: 12,
+                          color: Colors.black,
+                        ),
                       ),
                     ],
                   ),

@@ -1,62 +1,83 @@
-class SurahDetailsModel {
+class AudioModel {
   int? code;
   String? status;
-  AyahData? data;
+  AudioData? data;
 
-  SurahDetailsModel({this.code, this.status, this.data});
+  AudioModel({this.code, this.status, this.data});
 
-  SurahDetailsModel.fromJson(Map<String, dynamic> json) {
-    code = json['code'];
-    status = json['status'];
-    data = json['data'] != null ? new AyahData.fromJson(json['data']) : null;
+  AudioModel.fromJson(Map<String, dynamic> json)
+      : this(
+    code : json['code'],
+    status : json['status'],
+    data : json['data']
+  );
+
+  Map<String, dynamic> toJson() {
+    return {
+      'code':  code,
+      'status': status,
+      'data': data,
+    };
+  }
+}
+
+class AudioData {
+  List<Surahs>? surahs;
+  Edition? edition;
+
+  AudioData({this.surahs, this.edition});
+
+  AudioData.fromJson(Map<String, dynamic> json) {
+    if (json['surahs'] != null) {
+      surahs = <Surahs>[];
+      json['surahs'].forEach((v) {
+        surahs!.add(Surahs.fromJson(v));
+      });
+    }
+    edition =
+    json['edition'] != null ? new Edition.fromJson(json['edition']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['code'] = this.code;
-    data['status'] = this.status;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
+    if (this.surahs != null) {
+      data['surahs'] = this.surahs!.map((v) => v.toJson()).toList();
+    }
+    if (this.edition != null) {
+      data['edition'] = this.edition!.toJson();
     }
     return data;
   }
 }
 
-class AyahData {
+class Surahs {
   int? number;
   String? name;
   String? englishName;
   String? englishNameTranslation;
   String? revelationType;
-  int? numberOfAyahs;
-  List<AyahsModel>? ayahsModel;
-  Edition? edition;
+  List<Ayahs>? ayahs;
 
-  AyahData(
+  Surahs(
       {this.number,
         this.name,
         this.englishName,
         this.englishNameTranslation,
         this.revelationType,
-        this.numberOfAyahs,
-        this.ayahsModel,
-        this.edition});
+        this.ayahs});
 
-  AyahData.fromJson(Map<String, dynamic> json) {
+  Surahs.fromJson(Map<String, dynamic> json) {
     number = json['number'];
     name = json['name'];
     englishName = json['englishName'];
     englishNameTranslation = json['englishNameTranslation'];
     revelationType = json['revelationType'];
-    numberOfAyahs = json['numberOfAyahs'];
     if (json['ayahs'] != null) {
-      ayahsModel = <AyahsModel>[];
+      ayahs = <Ayahs>[];
       json['ayahs'].forEach((v) {
-        ayahsModel!.add(new AyahsModel.fromJson(v));
+        ayahs!.add(new Ayahs.fromJson(v));
       });
     }
-    edition =
-    json['edition'] != null ? new Edition.fromJson(json['edition']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -66,19 +87,17 @@ class AyahData {
     data['englishName'] = this.englishName;
     data['englishNameTranslation'] = this.englishNameTranslation;
     data['revelationType'] = this.revelationType;
-    data['numberOfAyahs'] = this.numberOfAyahs;
-    if (this.ayahsModel != null) {
-      data['ayahs'] = this.ayahsModel!.map((v) => v.toJson()).toList();
-    }
-    if (this.edition != null) {
-      data['edition'] = this.edition!.toJson();
+    if (this.ayahs != null) {
+      data['ayahs'] = this.ayahs!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class AyahsModel {
+class Ayahs {
   int? number;
+  String? audio;
+  List<String>? audioSecondary;
   String? text;
   int? numberInSurah;
   int? juz;
@@ -88,8 +107,10 @@ class AyahsModel {
   int? hizbQuarter;
   bool? sajda;
 
-  AyahsModel(
+  Ayahs(
       {this.number,
+        this.audio,
+        this.audioSecondary,
         this.text,
         this.numberInSurah,
         this.juz,
@@ -99,8 +120,10 @@ class AyahsModel {
         this.hizbQuarter,
         this.sajda});
 
-  AyahsModel.fromJson(Map<String, dynamic> json) {
+  Ayahs.fromJson(Map<String, dynamic> json) {
     number = json['number'];
+    audio = json['audio'];
+    audioSecondary = json['audioSecondary'].cast<String>();
     text = json['text'];
     numberInSurah = json['numberInSurah'];
     juz = json['juz'];
@@ -114,6 +137,8 @@ class AyahsModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['number'] = this.number;
+    data['audio'] = this.audio;
+    data['audioSecondary'] = this.audioSecondary;
     data['text'] = this.text;
     data['numberInSurah'] = this.numberInSurah;
     data['juz'] = this.juz;
@@ -133,7 +158,6 @@ class Edition {
   String? englishName;
   String? format;
   String? type;
-  String? direction;
 
   Edition(
       {this.identifier,
@@ -141,8 +165,7 @@ class Edition {
         this.name,
         this.englishName,
         this.format,
-        this.type,
-        this.direction});
+        this.type});
 
   Edition.fromJson(Map<String, dynamic> json) {
     identifier = json['identifier'];
@@ -151,7 +174,6 @@ class Edition {
     englishName = json['englishName'];
     format = json['format'];
     type = json['type'];
-    direction = json['direction'];
   }
 
   Map<String, dynamic> toJson() {
@@ -162,7 +184,6 @@ class Edition {
     data['englishName'] = this.englishName;
     data['format'] = this.format;
     data['type'] = this.type;
-    data['direction'] = this.direction;
     return data;
   }
 }

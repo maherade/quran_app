@@ -19,4 +19,7 @@ class GetAudioLoadingState extends AppState {}
 class GetAudioSuccessState extends AppState {}
 class GetAudioErrorState extends AppState {}
 class ChangePlayState extends AppState {}
+class GetTafseerLoadingState extends AppState {}
+class GetTafseerSuccessState extends AppState {}
+class GetTafseerErrorState extends AppState {}
 

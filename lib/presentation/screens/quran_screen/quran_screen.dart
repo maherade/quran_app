@@ -17,7 +17,7 @@ class QuranScreen extends StatelessWidget {
         backgroundColor: ColorManager.grey,
         appBar: defaultAppBar(
           title: "القرآن الكريم",
-          isSideMenuShawn: true,
+          isSideMenuShawn: true, context: context,
         ),
         drawer: const SideMenu(),
         body: BlocConsumer<AppCubit, AppState>(
@@ -45,7 +45,7 @@ class QuranScreen extends StatelessWidget {
                                         // ayahContent:"${cubit.ayahContent![index].text}",
                                       ),
                                     ));
-                                cubit.getAudio(cubit.surahNames![index].number);
+                                // cubit.getAudio();
                               }).catchError((onError){
                                 print(onError.toString());
                               });

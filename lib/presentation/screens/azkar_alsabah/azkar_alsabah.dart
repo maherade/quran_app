@@ -17,12 +17,11 @@ class AzkarAlsabah extends StatelessWidget {
       backgroundColor: ColorManager.grey,
       appBar: defaultAppBar(
         title: "أذكار الصباح",
-        isSideMenuShawn: true,
+        isSideMenuShawn: true, context: context,
       ),
       drawer: const SideMenu(),
       body: BlocConsumer<AppCubit, AppState>(
         builder: (context, state) {
-          var cubit = AppCubit.get(context);
 
           return Padding(padding: EdgeInsets.all(10),
 

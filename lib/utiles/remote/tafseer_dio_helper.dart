@@ -1,13 +1,12 @@
-
 import 'package:dio/dio.dart';
 
-class AudioDioHelper {
+class TafseerDioHelper {
   static Dio? dio;
 
   static dioInit() {
     dio = Dio(
       BaseOptions(
-        baseUrl: 'http://api.alquran.cloud',
+        baseUrl: 'http://api.quran-tafseer.com/tafseer',
         receiveDataWhenStatusError: true,
       ),
     );
@@ -15,7 +14,7 @@ class AudioDioHelper {
 
   static Future<Response> getData({
     required String url,
-    Map<String, dynamic>? query,
+     Map<String, dynamic>? query,
   }) async {
     dio!.options.headers = {
       'Content-Type': 'application/json',

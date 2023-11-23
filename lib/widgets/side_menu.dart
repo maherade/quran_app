@@ -54,38 +54,6 @@ class _SideMenuState extends State<SideMenu> {
               ),
               SideMenuCard(
                 onTap: () {
-                  // Navigator.pushAndRemoveUntil(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => const QuranScreen()
-                  // ,    ), (route) => false);
-                },
-                image: "assets/images/listening.png",
-                title: "استماع",
-              ),
-              SizedBox(
-                height: MediaQuery
-                    .sizeOf(context)
-                    .height * .02,
-              ),
-              SideMenuCard(
-                onTap: () {
-                  // Navigator.pushAndRemoveUntil(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => const QuranScreen()
-                  // ,    ), (route) => false);
-                },
-                image: "assets/images/lamp.png",
-                title: "تفسير",
-              ),
-              SizedBox(
-                height: MediaQuery
-                    .sizeOf(context)
-                    .height * .02,
-              ),
-              SideMenuCard(
-                onTap: () {
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
