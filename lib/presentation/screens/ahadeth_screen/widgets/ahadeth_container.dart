@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islami_app/business_logic/app_cubit/app_cubit.dart';
-import 'package:islami_app/data/models/azkar/azkar_model/azkar_model.dart';
 import 'package:islami_app/styles/color_manager.dart';
 
-class AzkarContent extends StatelessWidget {
+class AhadethContainer extends StatelessWidget {
   int index;
-  String azkarTitle='';
-  List<Azkar> azkars=[];
-
-  AzkarContent({required this.index,required this.azkarTitle, super.key,required this.azkars});
+   AhadethContainer({  required this.index, super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppState>(
       builder: (context, state) {
+        var cubit = AppCubit.get(context);
         return Container(
           padding: const EdgeInsets.all(8),
           height: MediaQuery.of(context).size.height * .25,
@@ -25,23 +22,28 @@ class AzkarContent extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Align(
-                alignment: Alignment.topRight,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 5,
-                    vertical: 5
-                  ),
-                  child: Text(
-                    azkarTitle,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineSmall!
-                        .copyWith(color: Colors.black,
-                        fontSize: 15),
+              Container(
+                height: MediaQuery.of(context).size.height * .05,
+                decoration: const BoxDecoration(
+                  color: ColorManager.lightColor2,
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      " الحديث رقم ${cubit.ahadethItems[index].number}",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall!
+                          .copyWith(color: Colors.black,
+                      fontSize: 15),
 
+                    ),
                   ),
                 ),
+
               ),
               const Divider(
                 height: 1,
@@ -54,7 +56,7 @@ class AzkarContent extends StatelessWidget {
                 flex: 1,
                 child: SingleChildScrollView(
                   child: Text(
-                    azkars[index].content!,
+                    cubit.ahadethItems[index].arab!,
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall!
@@ -69,4 +71,5 @@ class AzkarContent extends StatelessWidget {
       listener: (context, state) {},
     );
   }
-}
+  }
+

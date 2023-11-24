@@ -12,6 +12,7 @@ class QuranScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppCubit.get(context).getAhadeth();
     return SafeArea(
       child: Scaffold(
         backgroundColor: ColorManager.grey,

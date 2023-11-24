@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:islami_app/data/models/ahadeth_model/ahadeth_model.dart';
 import 'package:islami_app/data/models/audio_model/AudioModel.dart';
 import 'package:islami_app/data/models/pray_model/pray_model.dart';
 import 'package:islami_app/data/models/tafseer_model/TafseerModel.dart';
+import 'package:islami_app/utiles/remote/ahadeth_dio_helper.dart';
 import 'package:islami_app/utiles/remote/azkar_dio_helper.dart';
 import 'package:islami_app/utiles/remote/dio_helper.dart';
 import 'package:islami_app/utiles/remote/pray_dio_helper.dart';
@@ -162,7 +164,6 @@ class AppCubit extends Cubit<AppState> {
     // });
   }
 
-
   int currentIndex = 0;
   int counter = 0;
   List<String> tasbehList = [
@@ -171,20 +172,44 @@ class AppCubit extends Cubit<AppState> {
     "الله أكبر",
   ];
 
-    sebhaCounter() {
-      counter++;
-      emit(ChangeCounterState());
-      if (counter == 31) {
+  sebhaCounter() {
+    counter++;
+    emit(ChangeCounterState());
+    if (counter == 31) {
       currentIndex++;
       emit(ChangeCounterState());
       counter = 0;
       emit(ChangeCounterState());
-
     }
     if (currentIndex > tasbehList.length - 1) {
       currentIndex = 0;
       emit(ChangeCounterState());
     }
+  }
+
+  AhadethModel? ahadethModel;
+  List<Items> ahadethItems = [];
+
+  Future<dynamic> getAhadeth() async {
+    ahadethItems = [];
+    emit(GetAhadethLoadingState());
+    await AhadethDioHelper.getData(
+        url: '/hadith/abu-dawud',
+        query: {
+          'page': '1',
+          'limit': '100',
+        }).then((value) {
+          print("///////////");
+          value.data['items'].forEach((element) {
+            ahadethItems.add(Items.fromJson(element));
+          });
+          print("++++${ahadethItems[0].arab}");
+          emit(GetAhadethSuccessState());
+
+    }).catchError((onError){
+      emit(GetAhadethErrorState());
+      print("***${onError.toString()}");
+    });
   }
 
 // AudioModel? audioModel;

@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:islami_app/business_logic/app_cubit/app_cubit.dart';
-import 'package:islami_app/presentation/screens/prayer_times/prayer_times.dart';
 import 'package:islami_app/presentation/screens/quran_screen/quran_screen.dart';
 import 'package:islami_app/utiles/local/cash_helper.dart';
+import 'package:islami_app/utiles/remote/ahadeth_dio_helper.dart';
 import 'package:islami_app/utiles/remote/audio_dio_helper.dart';
 import 'package:islami_app/utiles/remote/azkar_dio_helper.dart';
 import 'package:islami_app/utiles/remote/tafseer_dio_helper.dart';
@@ -23,6 +23,7 @@ void main() async {
   await TafseerDioHelper.dioInit();
   await PrayDioHelper.dioInit();
   await AudioDioHelper.dioInit();
+  await AhadethDioHelper.dioInit();
   await AzkarDioHelper.dioInit();
   runApp(const MyApp());
 }

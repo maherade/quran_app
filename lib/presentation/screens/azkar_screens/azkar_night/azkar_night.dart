@@ -17,7 +17,7 @@ class AzkarNight extends StatelessWidget {
           backgroundColor: ColorManager.grey,
           appBar: defaultAppBar(
             title: "أذكار المساء",
-            isSideMenuShawn: true, context: context,
+            isSideMenuShawn: false, context: context,
           ),
           drawer: const SideMenu(),
           body: BlocConsumer<AppCubit, AppState>(

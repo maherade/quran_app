@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FontConstants{
-  static const String arefFontFamily='Aref';
+  static const String arefFontFamily='Somar';
 }
 class FontWeightManager{
   static const FontWeight thin=FontWeight.w100;
