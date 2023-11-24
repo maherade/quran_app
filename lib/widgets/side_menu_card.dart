@@ -29,10 +29,12 @@ class SideMenuCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  title,
-                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                    color: Colors.black,
+                Expanded(
+                  child: Text(
+                    title,
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                      color: Colors.black,
+                    ),
                   ),
                 ),
                 const SizedBox(

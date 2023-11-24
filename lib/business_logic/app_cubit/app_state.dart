@@ -18,10 +18,14 @@ class GetZekrErrorState extends AppState {}
 class GetAudioLoadingState extends AppState {}
 class GetAudioSuccessState extends AppState {}
 class GetAudioErrorState extends AppState {}
-class PlayAudioState extends AppState {}
-class StopAudioState extends AppState {}
+class ChangePlayState extends AppState {}
 class GetTafseerLoadingState extends AppState {}
 class GetTafseerSuccessState extends AppState {}
 class GetTafseerErrorState extends AppState {}
 class ChangeCounterState extends AppState {}
+
+class GetPrayTimesLoadingState extends AppState {}
+class GetPrayTimesLSuccessState extends AppState {}
+class GetPrayTimesLErrorState extends AppState {}
+
 

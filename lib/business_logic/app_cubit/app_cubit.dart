@@ -2,9 +2,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islami_app/data/models/audio_model/AudioModel.dart';
+import 'package:islami_app/data/models/pray_model/pray_model.dart';
 import 'package:islami_app/data/models/tafseer_model/TafseerModel.dart';
 import 'package:islami_app/utiles/remote/azkar_dio_helper.dart';
 import 'package:islami_app/utiles/remote/dio_helper.dart';
+import 'package:islami_app/utiles/remote/pray_dio_helper.dart';
 import 'package:islami_app/utiles/remote/tafseer_dio_helper.dart';
 import 'package:meta/meta.dart';
 import 'package:islami_app/data/models/surah_details_model/surah_details_model.dart';
@@ -62,31 +64,8 @@ class AppCubit extends Cubit<AppState> {
     });
   }
 
-  Azkar? azkarModel;
-  List<Azkar> azkarContent = [];
 
-  Future<dynamic> getZekr({required String? zekr}) async {
-    azkarContent = [];
-    emit(GetZekrLoadingState());
-    await AzkarDioHelper.getData(
-      url: '/zekr?$zekr',
-    ).then((value) {
-      try {
-        emit(GetZekrSuccessState());
-        print("azkar-----------------------------${value.data}");
-        azkarModel = Azkar.fromJson(jsonDecode(value.data!));
-        azkarContent = value.data!;
 
-        // value.data.forEach((element) {
-        //   azkarContent.add(Azkar.fromJson(element));
-        // });
-        emit(GetZekrSuccessState());
-      } catch (e) {
-        emit(GetZekrErrorState());
-        print("*****${e.toString()}");
-      }
-    });
-  }
 
   // bool play = false;
   // final player = AudioPlayer();
@@ -230,4 +209,85 @@ class AppCubit extends Cubit<AppState> {
 //     });
 //   }
 // }
+
+
+
+
+
+  /// Pray Times
+
+  PrayModel? prayModel;
+
+  Future<void> getPrayTimes({
+    String city ='cairo',
+    String  country='egypt',
+  })
+  async{
+    emit(GetPrayTimesLoadingState());
+    await PrayDioHelper.getData(
+        url: 'v1/timingsByCity',
+        query: {
+          'city':city,
+          'country':country,
+          'method':'8',
+        }
+    ).then((value) {
+
+      print('Here');
+      print(value.data['code']);
+      prayModel=PrayModel.fromJson(value.data);
+
+      emit(GetPrayTimesLSuccessState());
+    }).catchError((error){
+
+      debugPrint('Error in get pray times is ${error.toString()}');
+      emit(GetPrayTimesLErrorState());
+    });
+
+  }
+
+
+  /// Azkar
+
+  List<Azkar> azkarMorning=[];
+  List<Azkar> azkarNight=[];
+  List<Azkar>  azkarDooa=[];
+  List<Azkar>  azkarTasabih=[];
+
+  Future<void> getZekr() async {
+    emit(GetZekrLoadingState());
+    AzkarDioHelper.getData(
+      url: 'azkar.json',
+    ).then((value) {
+
+      jsonDecode(value.data)['أذكار الصباح'][0].forEach((element){
+        print(element);
+        azkarMorning.add(Azkar.fromJson(element));
+      });
+
+
+      jsonDecode(value.data)['أذكار المساء'].forEach((element){
+        print(element);
+        azkarNight.add(Azkar.fromJson(element));
+      });
+
+      print(azkarNight[0].category);
+
+      jsonDecode(value.data)['أذكار بعد السلام من الصلاة المفروضة'].forEach((element){
+        print(element);
+        azkarDooa.add(Azkar.fromJson(element));
+      });
+
+      jsonDecode(value.data)['تسابيح'].forEach((element){
+        print(element);
+        azkarTasabih.add(Azkar.fromJson(element));
+      });
+
+      emit(GetZekrSuccessState());
+    }).catchError((error) {
+      print('Error in Get Zekr From Api is :${error.toString()}');
+      emit(GetZekrErrorState());
+    });
+  }
+
 }
