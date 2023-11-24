@@ -27,6 +27,8 @@ AppBar defaultAppBar({required BuildContext context, required String title,isSid
 
               );
         },
-      ):null
+      ):IconButton(onPressed: (){
+        Navigator.pop(context);
+      }, icon: const Icon(Icons.arrow_back_ios))
   );
 }

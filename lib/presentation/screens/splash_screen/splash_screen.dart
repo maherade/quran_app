@@ -18,13 +18,17 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(seconds: 5), () {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>const QuranScreen(),),);
     });
-    return Container(
-      color: ColorManager.primaryColor,
-      width: double.infinity,
-      height: double.infinity,
-      child: Center(
-        child: Image.asset("assets/images/logo.png",width: MediaQuery.sizeOf(context).width*.35,height: MediaQuery.sizeOf(context).height*.35),
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          color: ColorManager.primaryColor,
+          width: double.infinity,
+          height: double.infinity,
+          child: Center(
+            child: Image.asset("assets/images/logo.png",width: MediaQuery.sizeOf(context).width*.35,height: MediaQuery.sizeOf(context).height*.35),
+          ),
+          ),
       ),
-      );
+    );
   }
 }

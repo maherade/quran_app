@@ -6,7 +6,7 @@ class AzkarDioHelper {
   static dioInit() {
     dio = Dio(
       BaseOptions(
-        baseUrl: 'https://ayah.nawafdev.com/api',
+        baseUrl: 'https://azkar-api.nawafhq.repl.co',
         receiveDataWhenStatusError: true,
       ),
     );

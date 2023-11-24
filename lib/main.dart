@@ -6,6 +6,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:islami_app/business_logic/app_cubit/app_cubit.dart';
 import 'package:islami_app/utiles/local/cash_helper.dart';
 import 'package:islami_app/utiles/remote/audio_dio_helper.dart';
+import 'package:islami_app/utiles/remote/azkar_dio_helper.dart';
 import 'package:islami_app/utiles/remote/tafseer_dio_helper.dart';
 import 'business_logic/localization_cubit/app_localization.dart';
 import 'business_logic/localization_cubit/localization_cubit.dart';
@@ -18,6 +19,7 @@ void main() async {
   await CashHelper.init();
   await DioHelper.dioInit();
   await TafseerDioHelper.dioInit();
+  await AzkarDioHelper.dioInit();
   await AudioDioHelper.dioInit();
   runApp(const MyApp());
 }

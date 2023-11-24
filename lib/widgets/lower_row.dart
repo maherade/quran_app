@@ -20,7 +20,6 @@ class LowerRow extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              if (context != context) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -30,7 +29,6 @@ class LowerRow extends StatelessWidget {
                         index: AppCubit.get(context).surahNames![index].number,
                       ),
                     ));
-              }
             },
             child: Text(
               "قراءة",
@@ -43,47 +41,22 @@ class LowerRow extends StatelessWidget {
           const VerticalDivider(
             thickness: 1,
           ),
-          // InkWell(
-          //   onTap: () {
-          //     AppCubit.get(context).getTafseer(
-          //         suraNumber: AppCubit.get(context).surahNames![index - 1].number,
-          //         ayahNumber: AppCubit.get(context).tafseerContent![index - 1].ayahNumber,);
-          //     Navigator.push(context, MaterialPageRoute(
-          //       builder: (context) {
-          //         return TafseerScreen(
-          //           index: AppCubit.get(context).surahNames![index - 1].number,
-          //           surahName:
-          //               "${AppCubit.get(context).surahNames![index - 1].name}",
-          //         );
-          //       },
-          //     ));
-          //   },
-          //   child: Text(
-          //     "تفسير",
-          //     style: Theme.of(context)
-          //         .textTheme
-          //         .headlineSmall!
-          //         .copyWith(color: Colors.black),
-          //   ),
-          // ),
-          // const VerticalDivider(
-          //   thickness: 1,
-          // ),
           InkWell(
             onTap: () {
               AppCubit.get(context).getAudio();
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return AudioScreen(
-                    index: AppCubit.get(context).surahNames![index - 1].number,
-                    surahName:
-                        "${AppCubit.get(context).surahNames![index - 1].name}",
-                  );
-                },
-              ));
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return AudioScreen(
+                      index: AppCubit.get(context).surahNames![index - 1].number,
+                      surahName:
+                      "${AppCubit.get(context).surahNames![index - 1].name}",
+                    );
+                  },
+                ));
+
             },
             child: Text(
-              "إستماع",
+              "استماع",
               style: Theme.of(context)
                   .textTheme
                   .headlineSmall!

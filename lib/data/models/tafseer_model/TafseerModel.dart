@@ -5,30 +5,28 @@ class TafseerModel {
   int? ayahNumber;
   String? text;
 
-  TafseerModel({
-    this.tafseerId,
-    this.tafseerName,
-    this.ayahUrl,
-    this.ayahNumber,
-    this.text});
+  TafseerModel(
+      {this.tafseerId,
+      this.tafseerName,
+      this.ayahUrl,
+      this.ayahNumber,
+      this.text});
 
-  TafseerModel.fromJson(Map<String, dynamic> json) : this(
-      tafseerId : json['tafseerId'],
-      tafseerName : json['tafseerName'],
-      ayahUrl : json['ayahUrl'],
-  ayahNumber : json['ayahNumber'],
-  text : json['text']
-  );
-
+  TafseerModel.fromJson(Map<String, dynamic> json)
+      : this(
+            tafseerId: json['tafseerId'],
+            tafseerName: json['tafseerName'],
+            ayahUrl: json['ayahUrl'],
+            ayahNumber: json['ayahNumber'],
+            text: json['text']);
 
   Map<String, dynamic> toJson() {
     return {
-    'tafseerId' : tafseerId,
-    'tafseerName' : tafseerName,
-    'ayahUrl' : ayahUrl,
-    'ayahNumber' : ayahNumber,
-    'text' : text,
-  };
+      'tafseerId': tafseerId,
+      'tafseerName': tafseerName,
+      'ayahUrl': ayahUrl,
+      'ayahNumber': ayahNumber,
+      'text': text,
+    };
   }
-
 }

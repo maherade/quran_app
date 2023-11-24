@@ -32,7 +32,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
             backgroundColor: ColorManager.grey,
             appBar: defaultAppBar(
               title: widget.surahName,
-              isSideMenuShawn: false, context: context,
+              isSideMenuShawn: true, context: context,
             ),
             // floatingActionButton: FloatingActionButton(
             //   onPressed: () {

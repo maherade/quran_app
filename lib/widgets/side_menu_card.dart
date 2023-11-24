@@ -40,8 +40,8 @@ class SideMenuCard extends StatelessWidget {
                 ),
                 Image.asset(
                   image,
-                  width: MediaQuery.sizeOf(context).width * .11,
-                  height: MediaQuery.sizeOf(context).height * .11,
+                  width: MediaQuery.sizeOf(context).width * .14,
+                  height: MediaQuery.sizeOf(context).height * .14,
                 ),
               ],
             ),

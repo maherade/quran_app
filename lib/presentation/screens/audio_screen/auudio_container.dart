@@ -40,18 +40,15 @@ class _AudioContainerState extends State<AudioContainer> {
                   children: [
                     IconButton(
                         onPressed: () {
-                           cubit.changePlay(
-                               cubit.audioContent![widget.index].ayahs![widget.index].audio!,);
-                        },
-                        icon: cubit.play == false
-                            ?   const Icon(
-                                Icons.play_arrow,
-                                color: Colors.black,
-                              )
-                            :   const Icon(
-                                Icons.pause,
-                                color: Colors.black,
-                              )),
+                          //    cubit.changePlay(
+                          //        cubit.audioModel!.data!.surahs![widget.index].ayahs![widget.index].audio!,);
+                          },
+                          icon:const Icon(
+                                  Icons.play_arrow,
+                                  color: Colors.black,
+                                ),
+
+                    ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * .25,
                     ),

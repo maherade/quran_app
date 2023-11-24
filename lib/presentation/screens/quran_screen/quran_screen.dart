@@ -23,7 +23,8 @@ class QuranScreen extends StatelessWidget {
         body: BlocConsumer<AppCubit, AppState>(
           builder: (context, state) {
             var cubit = AppCubit.get(context);
-            return Padding(
+            return cubit.surahNames!.isNotEmpty ?
+            Padding(
               padding: const EdgeInsets.all(10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -61,7 +62,8 @@ class QuranScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            );
+            )
+            :const Center(child: CircularProgressIndicator(color: ColorManager.darkBlueColor,),);
           },
           listener: (context, state) {},
         ),
