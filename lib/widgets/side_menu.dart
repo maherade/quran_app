@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/presentation/screens/ahadeth_screen/ahadeth_screen.dart';
+import 'package:islami_app/presentation/screens/allah_names/allah_names.dart';
+import 'package:islami_app/presentation/screens/astakhar_pray/astakhar_pray.dart';
 import 'package:islami_app/presentation/screens/quran_screen/quran_screen.dart';
 import 'package:islami_app/presentation/screens/rasol_life_screen/rasol_life_screen.dart';
 import 'package:islami_app/presentation/screens/tasbeeh_screen/tasbeeh_screen.dart';
@@ -138,6 +140,34 @@ class _SideMenuState extends State<SideMenu> {
                   image: "assets/images/tasbih.png",
                   title: "السبحه",
                 ),
+
+                SizedBox(
+                  height: MediaQuery.sizeOf(context).height * .02,
+                ),
+                SideMenuCard(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                      return const AstakharPray();
+                    }));
+                  },
+                  image: "assets/images/stakhara.png",
+                  title: "صلاه الاستخاره",
+                ),
+
+
+                SizedBox(
+                  height: MediaQuery.sizeOf(context).height * .02,
+                ),
+                SideMenuCard(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                      return const AllahNames();
+                    }));
+                  },
+                  image: "assets/images/allah.png",
+                  title: "اسماء الله الحسنه",
+                ),
+
                 SizedBox(
                   height: MediaQuery.sizeOf(context).height * .02,
                 ),
