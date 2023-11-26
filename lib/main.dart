@@ -61,7 +61,7 @@ class _MyAppState extends State<MyApp> {
             home: const QuranScreen(),
 
             theme: ThemeData(
-              fontFamily: 'Somar',
+              fontFamily: 'AmiriQuran',
             ),
 
             localizationsDelegates: const [
