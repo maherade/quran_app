@@ -47,6 +47,7 @@ dependencies:
   animated_flip_counter: ^0.2.6
   flutter_qiblah: ^2.2.0
   expansion_tile_card: ^3.0.0
+  flutter_compass: ^0.7.0
 
 dev_dependencies:
   flutter_test:

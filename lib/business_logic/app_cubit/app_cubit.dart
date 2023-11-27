@@ -174,6 +174,7 @@ class AppCubit extends Cubit<AppState> {
 
   sebhaCounter() {
     counter++;
+    print(counter);
     emit(ChangeCounterState());
     if (counter == 31) {
       currentIndex++;
@@ -185,6 +186,10 @@ class AppCubit extends Cubit<AppState> {
       currentIndex = 0;
       emit(ChangeCounterState());
     }
+  }
+  resetCounter() {
+    counter = 0;
+    emit(ChangeCounterState());
   }
 
   AhadethModel? ahadethModel;
