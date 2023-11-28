@@ -15,12 +15,12 @@ class SurahContentWidget extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Center(
           child: Text(
-            '${AppCubit.get(context).ayahContent![index].text!.split("\n").join()} ${{
-            AppCubit.get(context).ayahContent![index].numberInSurah}}',
+            '${AppCubit.get(context).ayahContent![index].text!.split("\n").join()} (${
+            AppCubit.get(context).ayahContent![index].numberInSurah})',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                 color: ColorManager.lightColor,
-                fontSize: MediaQuery.of(context).size.height*.037
+                fontSize: MediaQuery.of(context).size.height*.032
             ),
           ),
         ),

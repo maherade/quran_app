@@ -75,100 +75,87 @@ class HomeScreen extends StatelessWidget {
 
         return Scaffold(
             backgroundColor: ColorManager.white,
+            appBar: AppBar(
+              toolbarHeight: 0.0,
+            ),
+            body: cubit.prayModel == null ? const Center(child: CircularProgressIndicator(),) : SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
 
-            body: CustomScrollView(
-              slivers: [
-
-                SliverAppBar(
-                  titleSpacing: 0.0,
-                  expandedHeight: size.height*.44,
-                  pinned: pinned,
-                  snap: snap,
-                  floating: floating,
-                  flexibleSpace: FlexibleSpaceBar(
-                    titlePadding:EdgeInsets.zero,
-                    title: Container(
+                    Container(
+                      height: MediaQuery.of(context).size.height*.3,
+                      width: double.infinity,
                       decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage('assets/images/back.jpg'),
-                              opacity: .9
-                          )
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('assets/images/muslam.jpg'),
+                        )
                       ),
                       child: Stack(
                         children: [
 
-                          /// row [city - country]
-                          Positioned(
-                            top: MediaQuery.of(context).size.height*.25,
-                            left: MediaQuery.of(context).size.height*.02,
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: MediaQuery.of(context).size.height*.01
-                              ),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  color: ColorManager.darkGrey.withOpacity(.5)
-                              ),
-                              child:  Text(
-                                'القاهره,مصر',
-                                style: TextStyle(
-                                    color: ColorManager.white,
-                                    fontSize: MediaQuery.of(context).size.height*.01,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-
                           /// text
                           Positioned(
-                            top: MediaQuery.of(context).size.height*.28,
-                            left: MediaQuery.of(context).size.width*.27,
-                            child: Text('$prayName',style: TextStyle(
-                                fontSize: MediaQuery.of(context).size.height*.04,
-                                color: ColorManager.primaryColor
+                            right: MediaQuery.of(context).size.width*.05,
+                            child: Text(prayName,style: TextStyle(
+                                fontSize: MediaQuery.of(context).size.height*.06,
+                                color: ColorManager.browenDark
                             ),),
                           ),
 
                           /// text [time]
                           Positioned(
-                            top: MediaQuery.of(context).size.height*.35,
-                            left: MediaQuery.of(context).size.width*.27,
-                            child:  Text('${DateTime.now().hour}:${DateTime.now().minute}',style: TextStyle(
-                                fontSize: MediaQuery.of(context).size.height*.03,
-                                color: ColorManager.white
-                            ),),
+                            top: MediaQuery.of(context).size.height*.12,
+                            right: MediaQuery.of(context).size.width*.02,
+                            child:   Text(' الصلاه القادمه في $nextPrayTime',style: TextStyle(
+                                fontSize: MediaQuery.of(context).size.height*.025,
+                                color: ColorManager.browenDark
+                            ),)
                           ),
 
                           /// text
-                          Positioned(
-                            top: MediaQuery.of(context).size.height*.415,
-                            left: MediaQuery.of(context).size.width*.23,
-                            child:  Text('الصلاه القادمه في $nextPrayTime',style: TextStyle(
-                                fontSize: MediaQuery.of(context).size.height*.014,
-                                color: ColorManager.white
-                            ),),
-                          ),
+
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                              alignment: Alignment.center,
+                              decoration:BoxDecoration(
+                                  color: ColorManager.browenDark.withOpacity(.9),
+                                  borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(15),
+                                  topLeft: Radius.circular(15),
+                                )
+                              ),
+                              height: MediaQuery.of(context).size.height*.07,
+                              width: double.infinity,
+                              child: Text(
+                                '${cubit.prayModel!.data!.date!.hijri!.weekday!.ar} ${cubit.prayModel!.data!.date!.hijri!.day} ${cubit.prayModel!.data!.date!.hijri!.month!.ar} ${cubit.prayModel!.data!.date!.hijri!.year}',
+                                style: TextStyle(
+                                color: Colors.white,
+                                fontSize: MediaQuery.of(context).size.height*.027,
+                              ),
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),
-                    ),
-                  centerTitle: true,
-                ),
 
-                SliverToBoxAdapter(
-                  child: Container(
-                    color: ColorManager.darkGrey,
-                    child: Column(
-                      children: [
 
-                        GridView.count(
-                          padding: EdgeInsets.zero,
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          childAspectRatio: 1/1,
-                            crossAxisCount: 2,
+                    Container(
+                      color: ColorManager.darkWhite,
+                      child: Column(
+                        children: [
+
+                          SizedBox(height: MediaQuery.of(context).size.height*.01,),
+
+                          GridView.count(
+                            padding: EdgeInsets.zero,
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            childAspectRatio: 1/1.2,
+                            crossAxisCount: 3,
                             children: List.generate(cubit.sectionTitles.length, (index) =>
 
                                 GestureDetector(
@@ -178,42 +165,43 @@ class HomeScreen extends StatelessWidget {
                                     }));
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(5.0),
                                     child: Material(
-                                      elevation: 10,
+                                      elevation: 2,
                                       borderRadius: BorderRadius.circular(12),
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(12),
-                                          color: ColorManager.white.withOpacity(.5),
+                                          borderRadius: BorderRadius.circular(5),
+                                          color: ColorManager.browen.withOpacity(.95),
                                         ),
                                         child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               Image(
                                                 image: AssetImage(cubit.sectionImages[index]),
-                                                height: MediaQuery.of(context).size.height*.1,
-                                                width: MediaQuery.of(context).size.height*.1,
+                                                height: MediaQuery.of(context).size.height*.05,
+                                                width: MediaQuery.of(context).size.height*.05,
                                               ),
 
                                               Text(cubit.sectionTitles[index],style: TextStyle(
-                                                color: ColorManager.darkGreen,
-                                                fontSize: MediaQuery.of(context).size.height*.03,
+                                                color: ColorManager.browenDark,
+                                                fontSize: MediaQuery.of(context).size.height*.025,
                                               )),
-                                      ]
+                                            ]
+                                        ),
+                                      ),
                                     ),
                                   ),
-                              ),
-                            ),
                                 )),
-                        )
+                          )
 
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
-            )
+                  ],
+                ),
+              ),
+            ),
         );
       },
     );

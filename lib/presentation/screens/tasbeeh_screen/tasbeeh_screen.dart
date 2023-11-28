@@ -68,7 +68,7 @@ class _TasbeehScreenState extends State<TasbeehScreen> {
                             fontSize: 80,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
-                            locale: const Locale("en", "US"),
+                            locale: const Locale("ar", "EG"),
                             shadows: [
                               BoxShadow(
                                 color: Colors.grey.withOpacity(.3),
@@ -94,7 +94,7 @@ class _TasbeehScreenState extends State<TasbeehScreen> {
                             height: MediaQuery.sizeOf(context).height * .15,
                             width: MediaQuery.sizeOf(context).width * .3,
                             decoration: BoxDecoration(
-                              color: ColorManager.darkGreen,
+                              color: ColorManager.darkGrey,
                               borderRadius: BorderRadius.circular(50),
                             ),
                             child: Align(

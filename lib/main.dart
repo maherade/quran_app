@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -7,6 +8,7 @@ import 'package:islami_app/business_logic/app_cubit/app_cubit.dart';
 import 'package:islami_app/presentation/screens/home_screen/home_screen.dart';
 import 'package:islami_app/presentation/screens/prayer_times/prayer_times.dart';
 import 'package:islami_app/presentation/screens/quran_screen/quran_screen.dart';
+import 'package:islami_app/styles/color_manager.dart';
 import 'package:islami_app/utiles/local/cash_helper.dart';
 import 'package:islami_app/utiles/remote/ahadeth_dio_helper.dart';
 import 'package:islami_app/utiles/remote/audio_dio_helper.dart';
@@ -62,6 +64,12 @@ class _MyAppState extends State<MyApp> {
             home: const HomeScreen(),
 
             theme: ThemeData(
+              appBarTheme: AppBarTheme(
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: ColorManager.browenDark,
+                  statusBarIconBrightness: Brightness.light,
+                )
+              ),
               fontFamily: 'AmiriQuran',
             ),
 

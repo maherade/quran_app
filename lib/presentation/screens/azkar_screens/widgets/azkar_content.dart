@@ -60,7 +60,7 @@ class AzkarContent extends StatelessWidget {
                     .headlineSmall!
                     .copyWith(
                     color: ColorManager.lightColor,
-                  fontSize: MediaQuery.sizeOf(context).height * .028
+                    fontSize: MediaQuery.sizeOf(context).height * .025
                 ),
               )
             ],

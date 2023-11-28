@@ -149,20 +149,20 @@ class PrayerTimes extends StatelessWidget {
                         /// text [time]
                         Positioned(
                           top: MediaQuery.of(context).size.height*.13,
-                          left: MediaQuery.of(context).size.width*.390,
+                          left: MediaQuery.of(context).size.width*.42,
                           child:  Text('${DateTime.now().hour}:${DateTime.now().minute}',style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.height*.055,
-                              color: ColorManager.white
+                              fontSize: MediaQuery.of(context).size.height*.05,
+                              color: ColorManager.darkGrey
                           ),),
                         ),
 
                         /// text
                         Positioned(
-                          top: MediaQuery.of(context).size.height*.23,
+                          top: MediaQuery.of(context).size.height*.22,
                           left: MediaQuery.of(context).size.width*.32,
                           child:  Text(' الصلاه القادمه في $nextPrayTime',style: TextStyle(
                               fontSize: MediaQuery.of(context).size.height*.025,
-                              color: ColorManager.white
+                              color: ColorManager.darkGrey
                           ),),
                         ),
                       ],

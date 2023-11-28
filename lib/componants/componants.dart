@@ -14,11 +14,11 @@ AppBar defaultAppBar({required BuildContext context, required String title,isSid
       ),
       centerTitle: true,
       title: Text(title,style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-        color: Colors.white,
+        color: ColorManager.white,
         fontSize: MediaQuery.of(context).size.height*.03,
       )),
       leading:IconButton(onPressed: (){
         Navigator.pop(context);
-      }, icon: const Icon(Icons.arrow_back_ios,color: Colors.white,size: 15,))
+      }, icon: const Icon(Icons.arrow_back_ios,color: ColorManager.white,size: 15,))
   );
 }

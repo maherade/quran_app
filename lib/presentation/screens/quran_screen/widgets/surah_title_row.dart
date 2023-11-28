@@ -34,7 +34,7 @@ class SurahTitleRow extends StatelessWidget {
                   Text(
                     cubit.surahModel!.data![index].name!,
                     style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                      color: Colors.white,
+                      color: ColorManager.white,
                       fontSize: MediaQuery.of(context).size.height*.027,
                     ),
                   ),
