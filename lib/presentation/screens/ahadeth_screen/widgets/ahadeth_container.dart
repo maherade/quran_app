@@ -17,7 +17,7 @@ class AhadethContainer extends StatelessWidget {
           height: MediaQuery.of(context).size.height * .25,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: ColorManager.lightColor2,
+            color: ColorManager.darkGrey,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Column(
@@ -25,11 +25,13 @@ class AhadethContainer extends StatelessWidget {
               Container(
                 height: MediaQuery.of(context).size.height * .05,
                 decoration: const BoxDecoration(
-                  color: ColorManager.lightColor2,
+                  color: ColorManager.darkGrey,
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0,
+                  ),
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Text(
@@ -37,7 +39,7 @@ class AhadethContainer extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .headlineSmall!
-                          .copyWith(color: Colors.black,
+                          .copyWith(color: ColorManager.lightColor,
                       fontSize: 15),
 
                     ),
@@ -45,9 +47,11 @@ class AhadethContainer extends StatelessWidget {
                 ),
 
               ),
+              SizedBox(height: 10,),
               const Divider(
                 height: 1,
                 thickness: 1,
+                color: ColorManager.lightColor,
               ),
               SizedBox(
                 height: MediaQuery.sizeOf(context).height * .01,
@@ -60,7 +64,10 @@ class AhadethContainer extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall!
-                        .copyWith(color: Colors.black),
+                        .copyWith(
+                        color: ColorManager.lightColor,
+                        fontSize: MediaQuery.sizeOf(context).height * .028
+                    ),
                   ),
                 ),
               )

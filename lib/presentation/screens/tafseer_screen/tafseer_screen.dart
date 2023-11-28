@@ -27,7 +27,6 @@ class TafseerScreen extends StatelessWidget {
           builder: (context, state) {
             return Container(
               padding: const EdgeInsets.all(15),
-              height: double.infinity,
               width: double.infinity,
               child: TafseerContent(index: index,)
             ,

@@ -8,12 +8,14 @@ class AstakharPray extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      backgroundColor: ColorManager.darkGrey,
       appBar: defaultAppBar(
           context: context,
           title: 'صلاه الاستخاره'
       ),
       body: SingleChildScrollView(
         child: Container(
+          color: ColorManager.darkGrey,
           padding: EdgeInsets.symmetric(
             horizontal: MediaQuery.of(context).size.height*.02,
             vertical: MediaQuery.of(context).size.height*.02,
@@ -23,7 +25,9 @@ class AstakharPray extends StatelessWidget {
 
               Text('حكم صلاة الاستخارة',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: ColorManager.black,
+                  color: ColorManager.lightColor,
+                  fontSize: MediaQuery.of(context).size.height * .038,
+                  fontWeight: FontWeight.w900
                 ),
               ),
 
@@ -31,16 +35,19 @@ class AstakharPray extends StatelessWidget {
 
               Text('أَجْمَعَ الْعُلَمَاءُ عَلَى أَنَّ الاسْتِخَارَةَ سُنَّةٌ، وَدَلِيلُ مَشْرُوعِيَّتِهَا مَا رَوَاهُ الْبُخَارِيُّ عَنْ جَابِرٍ رضي الله عنه «اللَّهُمَّ إنِّي أَسْتَخِيرُكَ بِعِلْمِكَ، وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ، وَأَسْأَلُكَ مِنْ فَضْلِكَ الْعَظِيمِ».',
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: ColorManager.black,
+                  color: ColorManager.lightColor,
+                  fontSize: MediaQuery.of(context).size.height * .025
                 ),
 
               ),
 
-              SizedBox(height: MediaQuery.of(context).size.height*.2,),
+              SizedBox(height: MediaQuery.of(context).size.height*.22,),
 
               Text('متى يحتاج الإنسان إلى صلاة الاستخارة؟',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: ColorManager.black,
+                  color: ColorManager.lightColor,
+                  fontSize: MediaQuery.of(context).size.height * .038,
+                  fontWeight: FontWeight.w900
                 ),
               ),
 
@@ -49,16 +56,20 @@ class AstakharPray extends StatelessWidget {
               Text(
                 'إذا تعرض أحدنا لأمور يتحير منها وتتشكل عليه، يحتاج للجوء إلى خالق رب السموات والأرض وخالق الناس، يسأله رافعاً يديه داعياً مستخيراً بالدعاء، راجياً الصواب في الطلب، فإنه أدعى للطمأنينة وراحة البال، فعندما يقدم على عمل ما كشراء سيارة، أو يريد الزواج أو يعمل في وظيفة معينة أو يريد سفراً فإنه يستخير له.يقول شيخ الإسلام ابن تيمية: ما ندم من استخار الخالق، وشاوو المخلوقين، وثبت في أمره، وقد قال سبحانه وتعالى: «فَبِمَا رَحْمَةٍ مِّنَ اللّهِ لِنتَ لَهُمْ وَلَوْ كُنتَ فَظًّا غَلِيظَ الْقَلْبِ لاَنفَضُّواْ مِنْ حَوْلِكَ فَاعْفُ عَنْهُمْ وَاسْتَغْفِرْ لَهُمْ وَشَاوِرْهُمْ فِي الأَمْرِ فَإِذَا عَزَمْتَ فَتَوَكَّلْ عَلَى اللّهِ إِنَّ اللّهَ يُحِبُّ الْمُتَوَكِّلِينَ» سورة آل عمرا ن: 159، وقال قتادة: ما تشاور قوم يبتغون وجه الله إلا هدوا إلى أرشد أمرهم'
                 ,style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: ColorManager.black,
+                  color: ColorManager.lightColor,
+                  fontSize: MediaQuery.of(context).size.height * .025,
               ),
               ),
 
-              SizedBox(height: MediaQuery.sizeOf(context).height * .6,),
+              SizedBox(height: MediaQuery.sizeOf(context).height * .83,),
 
               Text('دعاء صلاة الاستخارة',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: ColorManager.black,
-                ),
+                    color: ColorManager.lightColor,
+                    fontSize: MediaQuery.of(context).size.height * .038,
+                    fontWeight: FontWeight.w900
+
+                     ),
               ),
 
               SizedBox(height: MediaQuery.of(context).size.height*.06,),
@@ -66,16 +77,19 @@ class AstakharPray extends StatelessWidget {
               Text(
                 'عَنْ جَابِرٍ رضي الله عنه قَالَ: كَانَ رَسُولُ اللَّهِ صلى الله عليه وسلم يُعَلِّمُنَا الاسْتِخَارَةَ فِي الأُمُورِ كُلِّهَا كَمَا يُعَلِّمُنَا السُّورَةَ مِنْ الْقُرْآنِ يَقُولُ: إذَا هَمَّ أَحَدُكُمْ بِالأَمْرِ فَلْيَرْكَعْ رَكْعَتَيْنِ مِنْ غَيْرِ الْفَرِيضَةِ ثُمَّ لِيَقُلْ:«اللَّهُمَّ إنِّي أَسْتَخِيرُكَ بِعِلْمِكَ، وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ، وَأَسْأَلُكَ مِنْ فَضْلِكَ الْعَظِيمِ فَإِنَّكَ تَقْدِرُ وَلا أَقْدِرُ، وَتَعْلَمُ وَلا أَعْلَمُ، وَأَنْتَ عَلامُ الْغُيُوبِ..اللَّهُمَّ إنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الأَمْرَ (هنا تسمي حاجتك) خَيْرٌ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي فَاقْدُرْهُ لِي وَيَسِّرْهُ لِي ثُمَّ بَارِكْ لِي فِيهِ..اللَّهُمَّ وَإِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الأَمْرَ (هنا تسمي حاجتك) شَرٌّ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي فَاصْرِفْهُ عَنِّي وَاصْرِفْنِي عَنْهُ وَاقْدُرْ لِي الْخَيْرَ حَيْثُ كَانَ ثُمَّ ارْضِنِي بِهِ. (وَيُسَمِّي حَاجَتَهُ) وَفِي رواية « ثُمَّ رَضِّنِي بِهِ» رَوَاهُ الْبُخَارِيُّ 1166.'
                 ,style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: ColorManager.black,
-              ),
+                  color: ColorManager.lightColor,
+                  fontSize: MediaQuery.of(context).size.height * .025,
+               ),
               ),
 
 
-              SizedBox(height: MediaQuery.sizeOf(context).height * .6,),
+              SizedBox(height: MediaQuery.sizeOf(context).height * .84,),
 
               Text('كيفية صلاة الاستخارة',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: ColorManager.black,
+                    color: ColorManager.lightColor,
+                    fontSize: MediaQuery.of(context).size.height * .038,
+                    fontWeight: FontWeight.w900
                 ),
               ),
 
@@ -97,7 +111,8 @@ class AstakharPray extends StatelessWidget {
  10- والآن انتهت صلاة الاستخارة.. تاركًا أمرك إلى الله متوكلًا عليه.. واسعى في طلبك ودعك من الأحلام أو الضيق الذي يصابك.. ولا تلتفت إلى هذه الأمور بشيء.. واسعى في أمرك إلى آخر ماتصل إليه.
                 '''
                 ,style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: ColorManager.black,
+                  color: ColorManager.lightColor,
+                  fontSize: MediaQuery.of(context).size.height * .025,
               ),
               ),
 
@@ -106,7 +121,9 @@ class AstakharPray extends StatelessWidget {
 
               Text('الأوقات المستحبة لصلاة الاستخارة',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: ColorManager.black,
+                    color: ColorManager.lightColor,
+                    fontSize: MediaQuery.of(context).size.height * .038,
+                    fontWeight: FontWeight.w900
                 ),
               ),
 
@@ -118,7 +135,8 @@ class AstakharPray extends StatelessWidget {
 يؤكد الدكتور محمود شلبي، أمين الفتوى بدار الإفتاء المصرية، أن أنسب وقت لصلاة الاستخارة هو الثلث الأخير من الليل؛ أي قبل صلاة الفجر؛ لأن في هذا الوقت ينزل رب العزة سبحانه وتعالى للسماء الدنيا، ويقول سبحانه: هل من داع فأستجيب له؟ هل من مستغفر فأغفر له؟ هل من كذا.. هل من كذا.. حتى يطلع الفجر.
                 '''
                 ,style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: ColorManager.black,
+                  color: ColorManager.lightColor,
+                  fontSize: MediaQuery.of(context).size.height * .025,
               ),),
 
 
@@ -127,7 +145,9 @@ class AstakharPray extends StatelessWidget {
 
               Text('فائدة صلاة الاستخارة',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: ColorManager.black,
+                    color: ColorManager.lightColor,
+                    fontSize: MediaQuery.of(context).size.height * .038,
+                    fontWeight: FontWeight.w900
                 ),
               ),
 
@@ -151,7 +171,8 @@ class AstakharPray extends StatelessWidget {
 
                 '''
                 ,style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: ColorManager.black,
+                  color: ColorManager.lightColor,
+                  fontSize: MediaQuery.of(context).size.height * .025,
               ),
               ),
             ],

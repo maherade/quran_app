@@ -21,7 +21,7 @@ class SurahTitleRow extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               boxShadow: const [
                 BoxShadow(
-                  color: ColorManager.lightColor2,
+                  color: ColorManager.darkGrey,
                 )
               ]
             ),
@@ -34,7 +34,8 @@ class SurahTitleRow extends StatelessWidget {
                   Text(
                     cubit.surahModel!.data![index].name!,
                     style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                      color: Colors.black,
+                      color: Colors.white,
+                      fontSize: MediaQuery.of(context).size.height*.027,
                     ),
                   ),
                   Row(
@@ -43,15 +44,15 @@ class SurahTitleRow extends StatelessWidget {
                         Text(
                         "عدد الآيات ",
                         style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                          fontSize: 15,
-                          color: Colors.black,
+                          fontSize: MediaQuery.of(context).size.height*.02,
+                          color: ColorManager.lightColor,
                         ),
                       ),
                       Text(
                         "(${cubit.surahModel!.data![index].numberOfAyahs!})",
                         style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                          fontSize: 12,
-                          color: Colors.black,
+                          fontSize: MediaQuery.of(context).size.height*.02,
+                          color: ColorManager.lightColor,
                         ),
                       ),
                     ],

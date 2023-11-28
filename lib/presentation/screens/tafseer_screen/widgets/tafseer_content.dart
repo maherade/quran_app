@@ -20,10 +20,9 @@ class _TafseerContentState extends State<TafseerContent> {
       builder: (context, state) {
         return Container(
           padding: const EdgeInsets.all(8),
-          height: MediaQuery.of(context).size.height * .25,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: ColorManager.lightColor2,
+            color: ColorManager.darkGrey,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(
@@ -31,14 +30,16 @@ class _TafseerContentState extends State<TafseerContent> {
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
                     cubit.tafseerModel!.text!,
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall!
-                        .copyWith(color: Colors.black),
+                        .copyWith(
+                        color: ColorManager.lightColor,
+                      fontSize: MediaQuery.of(context).size.height*.035,
+                    ),
                   )
                 ],
               ),

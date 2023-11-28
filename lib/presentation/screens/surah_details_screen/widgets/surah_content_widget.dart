@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/business_logic/app_cubit/app_cubit.dart';
+import 'package:islami_app/styles/color_manager.dart';
 
 class SurahContentWidget extends StatelessWidget {
   int index;
@@ -17,7 +18,10 @@ class SurahContentWidget extends StatelessWidget {
             '${AppCubit.get(context).ayahContent![index].text!.split("\n").join()} ${{
             AppCubit.get(context).ayahContent![index].numberInSurah}}',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: Colors.black),
+            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                color: ColorManager.lightColor,
+                fontSize: MediaQuery.of(context).size.height*.037
+            ),
           ),
         ),
       ),

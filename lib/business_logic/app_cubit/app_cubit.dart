@@ -5,6 +5,18 @@ import 'package:islami_app/data/models/ahadeth_model/ahadeth_model.dart';
 import 'package:islami_app/data/models/audio_model/AudioModel.dart';
 import 'package:islami_app/data/models/pray_model/pray_model.dart';
 import 'package:islami_app/data/models/tafseer_model/TafseerModel.dart';
+import 'package:islami_app/presentation/screens/ahadeth_screen/ahadeth_screen.dart';
+import 'package:islami_app/presentation/screens/allah_names/allah_names.dart';
+import 'package:islami_app/presentation/screens/astakhar_pray/astakhar_pray.dart';
+import 'package:islami_app/presentation/screens/azkar_screens/azkar_alsabah/azkar_alsabah.dart';
+import 'package:islami_app/presentation/screens/azkar_screens/azkar_night/azkar_night.dart';
+import 'package:islami_app/presentation/screens/azkar_screens/azkar_pray/azkar_pray.dart';
+import 'package:islami_app/presentation/screens/azkar_screens/tasabih/tasabih.dart';
+import 'package:islami_app/presentation/screens/prayer_times/prayer_times.dart';
+import 'package:islami_app/presentation/screens/qebla_screen/qebla_screen.dart';
+import 'package:islami_app/presentation/screens/quran_screen/quran_screen.dart';
+import 'package:islami_app/presentation/screens/rasol_life_screen/rasol_life_screen.dart';
+import 'package:islami_app/presentation/screens/tasbeeh_screen/tasbeeh_screen.dart';
 import 'package:islami_app/utiles/remote/ahadeth_dio_helper.dart';
 import 'package:islami_app/utiles/remote/azkar_dio_helper.dart';
 import 'package:islami_app/utiles/remote/dio_helper.dart';
@@ -319,5 +331,64 @@ class AppCubit extends Cubit<AppState> {
       emit(GetZekrErrorState());
     });
   }
+
+  List<String> sectionImages=[
+    "assets/images/quran.png",
+    "assets/images/sun.png",
+    "assets/images/moon.png",
+    "assets/images/praying.png",
+    "assets/images/time.png",
+    "assets/images/hadeth.jpg",
+    "assets/images/sebha.jpg",
+    "assets/images/tasbih.png",
+    "assets/images/qibla.png",
+    "assets/images/stakhara.png",
+    "assets/images/allah.png",
+    "assets/images/paper.png",
+  ];
+
+  List<String> sectionTitles=[
+    "القرآن الكريم",
+    "أذكار الصباح",
+    "أذكار المساء",
+    "أذكار بعد الصلاه",
+    "مواقيت الصلاه",
+    "أحاديث",
+    "تسابيح",
+    "السبحه",
+    "القبله",
+    "صلاه الاستخاره",
+    "اسماء الله الحسنه",
+    "سيره الرسول",
+  ];
+
+  List<Widget> sectionWidget=[
+    QuranScreen(),
+    AzkarAlsabah(),
+    AzkarNight(),
+    AzkarPray(),
+    PrayerTimes(),
+    AhadethScreen(),
+    Tasabih(),
+    TasbeehScreen(),
+    QeblaScreen(),
+    AstakharPray(),
+    AllahNames(),
+    RasolLifeScreen(),
+  ];
+
+
+  List<Color> sectionColors=[
+    Colors.red,
+    Colors.blue,
+    Colors.green,
+    Colors.yellow,
+    Colors.orange,
+    Colors.purple,
+    Colors.pink,
+    Colors.teal,
+    Colors.brown,
+    Colors.lightGreen
+  ];
 
 }

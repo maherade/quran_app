@@ -82,186 +82,180 @@ class PrayerTimes extends StatelessWidget {
 
           return Scaffold(
 
-            appBar: AppBar(
-              toolbarHeight: 0.0,
-              elevation: 0.0,
-            ),
 
             body: cubit.prayModel !=null?
-            SafeArea(
-              child: Container(
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: AssetImage('assets/images/back.jpg'),
-                        opacity: .9
-                    )
-                ),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height*.32,
-                      width: double.infinity,
+            Container(
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage('assets/images/back.jpg'),
+                      opacity: .9
+                  )
+              ),
+              child: Column(
+                children: [
+                  SizedBox(height: MediaQuery.of(context).size.height*.04),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height*.32,
+                    width: double.infinity,
 
-                      child: Stack(
+                    child: Stack(
+                      children: [
+
+                        /// row [city - country]
+                        Positioned(
+                          top: MediaQuery.of(context).size.height*.03,
+                          left: MediaQuery.of(context).size.height*.04,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                vertical: MediaQuery.of(context).size.height*.005,
+                                horizontal: MediaQuery.of(context).size.height*.02
+                            ),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: ColorManager.darkGrey.withOpacity(.5)
+                            ),
+                            child: const Row(
+                              children: [
+                                Icon(
+                                  Icons.location_pin,
+                                  color: ColorManager.white,
+                                  size: 17,
+                                ),
+
+                                Text(
+                                  'القاهره,مصر',
+                                  style: TextStyle(
+                                      color: ColorManager.white,
+                                      fontSize: 14
+                                  ),
+                                ),
+
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        /// text
+                        Positioned(
+                          top: MediaQuery.of(context).size.height*.04,
+                          left: MediaQuery.of(context).size.width*.4,
+                          child: Text(prayName,style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.height*.065,
+                              color: ColorManager.primaryColor
+                          ),),
+                        ),
+
+                        /// text [time]
+                        Positioned(
+                          top: MediaQuery.of(context).size.height*.13,
+                          left: MediaQuery.of(context).size.width*.390,
+                          child:  Text('${DateTime.now().hour}:${DateTime.now().minute}',style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.height*.055,
+                              color: ColorManager.white
+                          ),),
+                        ),
+
+                        /// text
+                        Positioned(
+                          top: MediaQuery.of(context).size.height*.23,
+                          left: MediaQuery.of(context).size.width*.32,
+                          child:  Text(' الصلاه القادمه في $nextPrayTime',style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.height*.025,
+                              color: ColorManager.white
+                          ),),
+                        ),
+                      ],
+                    ),
+                  ),
+
+
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.of(context).size.height*.03
+                      ),
+                      width: double.infinity,
+                      decoration:  BoxDecoration(
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                        ),
+                        color: ColorManager.darkGrey.withOpacity(.95),
+
+                      ),
+                      child: Column(
                         children: [
 
-                          /// row [city - country]
-                          Positioned(
-                            top: MediaQuery.of(context).size.height*.03,
-                            left: MediaQuery.of(context).size.height*.04,
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: MediaQuery.of(context).size.height*.005,
-                                  horizontal: MediaQuery.of(context).size.height*.02
-                              ),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: ColorManager.darkGrey.withOpacity(.5)
-                              ),
-                              child: const Row(
-                                children: [
-                                  Icon(
-                                    Icons.location_pin,
-                                    color: ColorManager.white,
-                                    size: 17,
-                                  ),
 
-                                  Text(
-                                    'القاهره,مصر',
-                                    style: TextStyle(
-                                        color: ColorManager.white,
-                                        fontSize: 14
-                                    ),
-                                  ),
+                          SizedBox(height: MediaQuery.of(context).size.height*.02,),
 
-                                ],
+                          /// text
+                          Align(
+                            alignment: AlignmentDirectional.topStart,
+                            child: Text(
+                              '${cubit.prayModel!.data!.date!.hijri!.weekday!.ar} ${cubit.prayModel!.data!.date!.hijri!.day} ${cubit.prayModel!.data!.date!.hijri!.month!.ar} ${cubit.prayModel!.data!.date!.hijri!.year}',
+                              style: TextStyle(
+                                  color: ColorManager.lightColor,
+                                  fontSize: MediaQuery.of(context).size.height*.027
                               ),
                             ),
                           ),
 
-                          /// text
-                          Positioned(
-                            top: MediaQuery.of(context).size.height*.09,
-                            left: MediaQuery.of(context).size.width*.4,
-                            child: Text(prayName,style: TextStyle(
-                                fontSize: MediaQuery.of(context).size.height*.07,
-                                color: ColorManager.primaryColor
-                            ),),
-                          ),
+                          /// Listview
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height*.5,
+                            child: ListView.separated(
+                                padding: EdgeInsets.zero,
+                                itemBuilder: (context,index){
+                                  return  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
 
-                          /// text [time]
-                          Positioned(
-                            top: MediaQuery.of(context).size.height*.17,
-                            left: MediaQuery.of(context).size.width*.40,
-                            child:  Text('${DateTime.now().hour}:${DateTime.now().minute}',style: TextStyle(
-                                fontSize: MediaQuery.of(context).size.height*.07,
-                                color: ColorManager.white
-                            ),),
-                          ),
+                                      /// Image
+                                      Image(
+                                        image: AssetImage('assets/images/${prayTimesImages[index]}.png'),
+                                        height: MediaQuery.of(context).size.height*.05,
+                                        width: MediaQuery.of(context).size.height*.03,
+                                      ),
 
-                          /// text
-                          Positioned(
-                            top: MediaQuery.of(context).size.height*.25,
-                            left: MediaQuery.of(context).size.width*.32,
-                            child:  Text(' الصلاه القادمه في $nextPrayTime',style: TextStyle(
-                                fontSize: MediaQuery.of(context).size.height*.025,
-                                color: ColorManager.white
-                            ),),
+                                      SizedBox(width: MediaQuery.of(context).size.height*.01,),
+
+                                      /// Text
+                                      Text(
+                                        prayTimesName[index],
+                                        style: TextStyle(
+                                            color: ColorManager.lightColor,
+                                            fontSize: MediaQuery.of(context).size.height*.03
+                                        ),
+                                      ),
+
+
+                                      const Spacer(),
+
+                                      /// Time
+                                      Text(
+                                        prayTimesList[index],
+                                        style: TextStyle(
+                                            color: ColorManager.lightColor,
+                                            fontSize: MediaQuery.of(context).size.height*.03
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                                separatorBuilder: (context,index){
+                                  return const SizedBox(height: 10,);
+                                },
+                                itemCount: prayTimesName.length
+                            ),
                           ),
                         ],
                       ),
+
                     ),
-
-
-                    Expanded(
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: MediaQuery.of(context).size.height*.03
-                        ),
-                        width: double.infinity,
-                        decoration:  BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20),
-                          ),
-                          color: ColorManager.white.withOpacity(.95),
-
-                        ),
-                        child: Column(
-                          children: [
-
-
-                            SizedBox(height: MediaQuery.of(context).size.height*.02,),
-
-                            /// text
-                            Align(
-                              alignment: AlignmentDirectional.topStart,
-                              child: Text(
-                                '${cubit.prayModel!.data!.date!.hijri!.weekday!.ar} ${cubit.prayModel!.data!.date!.hijri!.day} ${cubit.prayModel!.data!.date!.hijri!.month!.ar} ${cubit.prayModel!.data!.date!.hijri!.year}',
-                                style: TextStyle(
-                                    color: ColorManager.black,
-                                    fontSize: MediaQuery.of(context).size.height*.03
-                                ),
-                              ),
-                            ),
-
-                            SizedBox(height: MediaQuery.of(context).size.height*.03,),
-
-                            /// Listview
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height*.5,
-                              child: ListView.separated(
-                                  itemBuilder: (context,index){
-                                    return  Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-
-                                        /// Image
-                                        Image(
-                                          image: AssetImage('assets/images/${prayTimesImages[index]}.png'),
-                                          height: MediaQuery.of(context).size.height*.05,
-                                          width: MediaQuery.of(context).size.height*.03,
-                                        ),
-
-                                        SizedBox(width: MediaQuery.of(context).size.height*.01,),
-
-                                        /// Text
-                                        Text(
-                                          prayTimesName[index],
-                                          style: TextStyle(
-                                              color: ColorManager.black,
-                                              fontSize: MediaQuery.of(context).size.height*.035
-                                          ),
-                                        ),
-
-
-                                        const Spacer(),
-
-                                        /// Time
-                                        Text(
-                                          prayTimesList[index],
-                                          style: TextStyle(
-                                              color: ColorManager.black,
-                                              fontSize: MediaQuery.of(context).size.height*.035
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                  separatorBuilder: (context,index){
-                                    return const SizedBox(height: 20,);
-                                  },
-                                  itemCount: prayTimesName.length
-                              ),
-                            ),
-                          ],
-                        ),
-
-                      ),
-                    )
-                  ],
-                ),
+                  )
+                ],
               ),
             ):
             const Center(child: CircularProgressIndicator(),)

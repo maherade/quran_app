@@ -12,9 +12,9 @@ class LowerRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.sizeOf(context).height * .07,
+      height: MediaQuery.sizeOf(context).height * .08,
       width: double.infinity,
-      color: ColorManager.lightColor,
+      color: ColorManager.darkGrey.withOpacity(.8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -35,11 +35,15 @@ class LowerRow extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .headlineSmall!
-                  .copyWith(color: Colors.black),
+                  .copyWith(
+                  color: ColorManager.lightColor,
+                  fontSize: MediaQuery.of(context).size.height*.027
+              ),
             ),
           ),
           const VerticalDivider(
             thickness: 1,
+            color: ColorManager.lightColor,
           ),
           InkWell(
             onTap: () {
@@ -60,7 +64,10 @@ class LowerRow extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .headlineSmall!
-                  .copyWith(color: Colors.black),
+                  .copyWith(
+                  color:ColorManager.lightColor,
+                  fontSize: MediaQuery.of(context).size.height*.027
+              ),
             ),
           ),
         ],

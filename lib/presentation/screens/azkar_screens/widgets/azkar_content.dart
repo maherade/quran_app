@@ -17,10 +17,9 @@ class AzkarContent extends StatelessWidget {
       builder: (context, state) {
         return Container(
           padding: const EdgeInsets.all(8),
-          height: MediaQuery.of(context).size.height * .25,
-          width: double.infinity,
+
           decoration: BoxDecoration(
-            color: ColorManager.lightColor2,
+            color: ColorManager.darkGrey,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Column(
@@ -37,29 +36,31 @@ class AzkarContent extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall!
-                        .copyWith(color: Colors.black,
-                        fontSize: 15),
+                        .copyWith(
+                        color: ColorManager.lightColor,
+                        fontSize: 15
+                    ),
 
                   ),
                 ),
               ),
+              const SizedBox(height: 5,),
               const Divider(
                 height: 1,
                 thickness: 1,
+                color: ColorManager.lightColor,
               ),
               SizedBox(
                 height: MediaQuery.sizeOf(context).height * .01,
               ),
-              Expanded(
-                flex: 1,
-                child: SingleChildScrollView(
-                  child: Text(
-                    azkars[index].content!,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineSmall!
-                        .copyWith(color: Colors.black),
-                  ),
+              Text(
+                azkars[index].content!,
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineSmall!
+                    .copyWith(
+                    color: ColorManager.lightColor,
+                  fontSize: MediaQuery.sizeOf(context).height * .028
                 ),
               )
             ],

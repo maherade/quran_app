@@ -4,7 +4,7 @@ import 'package:islami_app/styles/color_manager.dart';
 AppBar defaultAppBar({required BuildContext context, required String title,isSideMenuShawn = false}) {
   return AppBar(
     iconTheme: const IconThemeData(color: Colors.black),
-    backgroundColor: ColorManager.lightColor2,
+    backgroundColor: ColorManager.darkGrey,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(20),
@@ -14,21 +14,11 @@ AppBar defaultAppBar({required BuildContext context, required String title,isSid
       ),
       centerTitle: true,
       title: Text(title,style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-        color: Colors.black,
+        color: Colors.white,
+        fontSize: MediaQuery.of(context).size.height*.03,
       )),
-      leading: isSideMenuShawn?Builder(
-        builder: (context) {
-          return InkWell(
-              onTap: () {
-                Scaffold.of(context).openDrawer();
-              },
-              child: Image.asset("assets/images/menu.png",color: Colors.black.withOpacity(.9),)
-
-
-              );
-        },
-      ):IconButton(onPressed: (){
+      leading:IconButton(onPressed: (){
         Navigator.pop(context);
-      }, icon: const Icon(Icons.arrow_back_ios))
+      }, icon: const Icon(Icons.arrow_back_ios,color: Colors.white,size: 15,))
   );
 }

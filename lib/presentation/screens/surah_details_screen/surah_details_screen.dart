@@ -29,7 +29,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
         var cubit = AppCubit.get(context);
         return SafeArea(
           child: Scaffold(
-            backgroundColor: ColorManager.grey,
+            backgroundColor: ColorManager.darkGrey,
             appBar: defaultAppBar(
               title: widget.surahName,
               isSideMenuShawn: true, context: context,
