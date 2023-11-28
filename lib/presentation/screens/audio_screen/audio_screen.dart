@@ -20,6 +20,7 @@ class AudioScreen extends StatefulWidget {
 class _AudioScreenState extends State<AudioScreen> {
   @override
   Widget build(BuildContext context) {
+    // print("+++++++++++++++++++++${AppCubit.get(context).audioModel!.data!.surahs![widget.index].ayahs![widget.index].audio}");
     return SafeArea(
       child: Scaffold(
         backgroundColor: ColorManager.grey,

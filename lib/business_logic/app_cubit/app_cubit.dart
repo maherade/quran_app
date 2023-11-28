@@ -106,11 +106,12 @@ class AppCubit extends Cubit<AppState> {
       url: '/quran/ar.alafasy',
     ).then((value) {
       try {
+        // print("///////////");
+        //           value.data['items'].forEach((element) {
+        //             ahadethItems.add(Items.fromJson(element));
         print("-----------------------------${value.data}");
-        audioModel = AudioModel.fromJson(jsonDecode(value.data!));
-        audioContent = value.data!;
-        value.data!.forEach((element) {
-          audioContent.add(element);
+        value.data!['surahs'].forEach((element) {
+          audioContent.add(Surahs.fromJson(element));
         });
         emit(GetAudioSuccessState());
       } catch (e) {
@@ -152,28 +153,6 @@ class AppCubit extends Cubit<AppState> {
       emit(GetTafseerErrorState());
       print("***${onError.toString()}");
     });
-
-    // emit(GetTafseerLoadingState());
-    // await TafseerDioHelper.getData(
-    //   url: '/$tafseerId/$suraNumber/$ayahNumber',
-    // ).then((value) {
-    //   try {
-    //     emit(GetTafseerSuccessState());
-    //     print("-----------------------------${value.data}");
-    //     tafseerModel = TafseerModel.fromJson(value);
-    //     value.data.forEach((element) {
-    //       tafseerContent!.add(TafseerModel.fromJson(element.data()));
-    //       emit(GetTafseerSuccessState());
-    //       print("-----------------------------${tafseerContent![0].text}");
-    //     });
-    //   } catch (e) {
-    //     emit(GetTafseerErrorState());
-    //     print("*****${e.toString()}");
-    //   }
-    // }).catchError((onError) {
-    //   emit(GetTafseerErrorState());
-    //   print("***${onError.toString()}");
-    // });
   }
 
   int currentIndex = 0;
