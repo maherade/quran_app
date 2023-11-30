@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/business_logic/app_cubit/app_cubit.dart';
 import 'package:islami_app/styles/color_manager.dart';
 
 AppBar defaultAppBar({required BuildContext context, required String title,isSideMenuShawn = false}) {
@@ -19,6 +20,8 @@ AppBar defaultAppBar({required BuildContext context, required String title,isSid
       )),
       leading:IconButton(onPressed: (){
         Navigator.pop(context);
+        AppCubit.get(context).player.stop();
+        AppCubit.get(context).test='';
       }, icon: const Icon(Icons.arrow_back_ios,color: ColorManager.white,size: 15,))
   );
 }

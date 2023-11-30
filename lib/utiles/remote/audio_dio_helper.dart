@@ -7,7 +7,7 @@ class AudioDioHelper {
   static dioInit() {
     dio = Dio(
       BaseOptions(
-        baseUrl: 'http://api.alquran.cloud',
+        baseUrl: 'https://api.quran.com/api/v4/',
         receiveDataWhenStatusError: true,
       ),
     );

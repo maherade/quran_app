@@ -8,6 +8,7 @@ import 'package:islami_app/business_logic/app_cubit/app_cubit.dart';
 import 'package:islami_app/presentation/screens/home_screen/home_screen.dart';
 import 'package:islami_app/presentation/screens/prayer_times/prayer_times.dart';
 import 'package:islami_app/presentation/screens/quran_screen/quran_screen.dart';
+import 'package:islami_app/presentation/screens/splash_screen/splash_screen.dart';
 import 'package:islami_app/styles/color_manager.dart';
 import 'package:islami_app/utiles/local/cash_helper.dart';
 import 'package:islami_app/utiles/remote/ahadeth_dio_helper.dart';
@@ -51,7 +52,11 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (BuildContext context) => AppCubit()..getSurah()..getPrayTimes()..getZekr()),
+            create: (BuildContext context) => AppCubit()
+              ..getSurah()
+              ..getPrayTimes()
+              ..getZekr()
+              ..getAudio()),
         BlocProvider(
             create: (BuildContext context) =>
                 LocalizationCubit()..fetchLocalization()),
@@ -61,10 +66,10 @@ class _MyAppState extends State<MyApp> {
         builder: (context, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: const HomeScreen(),
+            home: const SplashScreen(),
 
             theme: ThemeData(
-              appBarTheme: AppBarTheme(
+              appBarTheme: const AppBarTheme(
                 systemOverlayStyle: SystemUiOverlayStyle(
                   statusBarColor: ColorManager.browenDark,
                   statusBarIconBrightness: Brightness.light,

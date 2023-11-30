@@ -122,7 +122,7 @@ class HomeScreen extends StatelessWidget {
                               alignment: Alignment.center,
                               decoration:BoxDecoration(
                                   color: ColorManager.browenDark.withOpacity(.9),
-                                  borderRadius: BorderRadius.only(
+                                  borderRadius: const BorderRadius.only(
                                   topRight: Radius.circular(15),
                                   topLeft: Radius.circular(15),
                                 )

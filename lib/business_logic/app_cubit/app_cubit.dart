@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islami_app/data/models/ahadeth_model/ahadeth_model.dart';
@@ -18,6 +19,7 @@ import 'package:islami_app/presentation/screens/quran_screen/quran_screen.dart';
 import 'package:islami_app/presentation/screens/rasol_life_screen/rasol_life_screen.dart';
 import 'package:islami_app/presentation/screens/tasbeeh_screen/tasbeeh_screen.dart';
 import 'package:islami_app/utiles/remote/ahadeth_dio_helper.dart';
+import 'package:islami_app/utiles/remote/audio_dio_helper.dart';
 import 'package:islami_app/utiles/remote/azkar_dio_helper.dart';
 import 'package:islami_app/utiles/remote/dio_helper.dart';
 import 'package:islami_app/utiles/remote/pray_dio_helper.dart';
@@ -81,46 +83,89 @@ class AppCubit extends Cubit<AppState> {
 
 
 
-  // bool play = false;
-  // final player = AudioPlayer();
-  //
-  // bool changePlay(String url) {
-  //   if (play == false) {
-  //     player.play(UrlSource(url));
-  //     emit(PlayAudioState());
-  //     return play = true;
-  //   } else {
-  //     player.stop();
-  //     emit(StopAudioState());
-  //     return play = false;
-  //   }
-  // }
-
   AudioModel? audioModel;
-  List<AudioData> audioContent = [];
 
-  Future<dynamic> getAudio() async {
-    audioContent = [];
+  Future<void> getAudio() async {
+    // audioContent = [];
     emit(GetAudioLoadingState());
-    await DioHelper.getData(
-      url: '/quran/ar.alafasy',
+     AudioDioHelper.getData(
+      url: 'chapter_recitations/1?language=en',
     ).then((value) {
-      try {
-        // print("///////////");
-        //           value.data['items'].forEach((element) {
-        //             ahadethItems.add(Items.fromJson(element));
-        print('hiiiiii');
-        print(value.data);
-        value.data!['data'].forEach((element) {
-          audioContent.add(AudioData.fromJson(element));
-          print("///${audioContent[0]}");
-        });
-        emit(GetAudioSuccessState());
-      } catch (e) {
-        emit(GetAudioErrorState());
-        print("*****${e.toString()}");
-      }
+      print(value.statusCode);
+
+      audioModel=AudioModel.fromJson(value.data);
+      print(audioModel!.audioFiles![0].audioUrl);
+
+      print('I am Here');
+      // print(value.data);
+
+      emit(GetAudioSuccessState());
+    }).catchError((error){
+      print('Error is ${error.toString()}');
+      emit(GetAudioErrorState());
     });
+  }
+
+  final player = AudioPlayer();
+
+  bool isPlaying=false;
+  String test='';
+  Future<void> audioPlayerFunction({required String url})async{
+
+    await player.play(UrlSource(url)).then((value) {
+      test='1';
+      emit(GetAudioSuccessState());
+
+    }).catchError((error){
+
+      print('Error is ${error.toString()}');
+      emit(GetAudioErrorState());
+    });
+
+  }
+
+  Future<bool> pausePlayer(context) async {
+    player.stop();
+    Navigator.pop(context,MaterialPageRoute(builder: (_){
+      return const QuranScreen();
+    }));
+    test='';
+    emit(GetAudioSuccessState());
+
+    return isPlaying;
+  }
+
+  void getPlayer(){
+
+    emit(GetAudioSuccessState());
+
+  }
+
+  double percentage=0.0;
+  int sets=0;
+  sebhaCounter() {
+    counter++;
+    percentage+=.030303030303;
+    print(counter);
+    emit(ChangeCounterState());
+    if (counter == 33 || percentage==999.999) {
+      currentIndex++;
+      sets++;
+      emit(ChangeCounterState());
+      counter = 0;
+      percentage=0.0;
+      emit(ChangeCounterState());
+    }
+    if (currentIndex > tasbehList.length - 1) {
+      currentIndex = 0;
+      emit(ChangeCounterState());
+    }
+  }
+  resetCounter() {
+    counter = 0;
+    sets=0;
+    percentage=0.0;
+    emit(ChangeCounterState());
   }
 
   TafseerModel? tafseerModel;
@@ -158,38 +203,31 @@ class AppCubit extends Cubit<AppState> {
 
   int currentIndex = 0;
   int counter = 0;
-  int sets = 0;
-  double percentage = 0.0;
   List<String> tasbehList = [
     "سبحان الله",
     "الحمد لله",
     "الله أكبر",
   ];
 
-  sebhaCounter() {
-    counter++;
-    percentage+=.030303030303;
-    print(counter);
-    emit(ChangeCounterState());
-    if (counter == 33 || percentage==999.999) {
-      currentIndex++;
-      sets++;
-      emit(ChangeCounterState());
-      counter = 0;
-      percentage=0.0;
-      emit(ChangeCounterState());
-    }
-    if (currentIndex > tasbehList.length - 1) {
-      currentIndex = 0;
-      emit(ChangeCounterState());
-    }
-  }
-  resetCounter() {
-    counter = 0;
-    sets=0;
-    percentage=0.0;
-    emit(ChangeCounterState());
-  }
+  // sebhaCounter() {
+  //   counter++;
+  //   print(counter);
+  //   emit(ChangeCounterState());
+  //   if (counter == 31) {
+  //     currentIndex++;
+  //     emit(ChangeCounterState());
+  //     counter = 0;
+  //     emit(ChangeCounterState());
+  //   }
+  //   if (currentIndex > tasbehList.length - 1) {
+  //     currentIndex = 0;
+  //     emit(ChangeCounterState());
+  //   }
+  // }
+  // resetCounter() {
+  //   counter = 0;
+  //   emit(ChangeCounterState());
+  // }
 
   AhadethModel? ahadethModel;
   List<Items> ahadethItems = [];
