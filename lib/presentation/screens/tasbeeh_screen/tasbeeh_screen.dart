@@ -1,11 +1,11 @@
 import 'dart:ui';
 
-import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islami_app/business_logic/app_cubit/app_cubit.dart';
 import 'package:islami_app/componants/componants.dart';
 import 'package:islami_app/styles/color_manager.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class TasbeehScreen extends StatefulWidget {
   const TasbeehScreen({super.key});
@@ -17,9 +17,13 @@ class TasbeehScreen extends StatefulWidget {
 class _TasbeehScreenState extends State<TasbeehScreen> {
   @override
   void initState() {
-    AppCubit.get(context).counter=0;
+    AppCubit.get(context).counter = 0;
+    AppCubit.get(context).currentIndex = 0;
+    AppCubit.get(context).sets = 0;
+    AppCubit.get(context).percentage = 0.0;
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppState>(
@@ -28,7 +32,7 @@ class _TasbeehScreenState extends State<TasbeehScreen> {
         return Scaffold(
           backgroundColor: ColorManager.grey,
           appBar: defaultAppBar(
-            title: "التسبيح",
+            title: "السبحة الإلكترونية",
             isSideMenuShawn: false,
             context: context,
           ),
@@ -41,98 +45,149 @@ class _TasbeehScreenState extends State<TasbeehScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    cubit.tasbehList[cubit.currentIndex],
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineLarge!
-                        .copyWith(color: ColorManager.darkGreen),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.sizeOf(context).height * .15,
-                  ),
-                  Container(
-                      height: MediaQuery.sizeOf(context).height * .2,
-                      width: MediaQuery.sizeOf(context).width * .4,
-                      decoration: BoxDecoration(
-                        color: ColorManager.darkGreen,
-                        borderRadius: BorderRadius.circular(30),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                        color: ColorManager.browen,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(15),
+                        ),
                       ),
                       child: Center(
-                        child: AnimatedFlipCounter(
-                          duration: const Duration(milliseconds: 300),
-                          value: cubit.counter,
-                          curve: Curves.elasticOut,
-                          wholeDigits: 1,
-                          textStyle: TextStyle(
-                            fontSize: 80,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            locale: const Locale("ar", "EG"),
-                            shadows: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(.3),
-                                offset: const Offset(7, 2),
-                                blurRadius: 8,
-                              ),
-                            ],
+                        child: Text(
+                          cubit.tasbehList[cubit.currentIndex],
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge!
+                              .copyWith(color: ColorManager.browenDark),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.sizeOf(context).height * .1,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      cubit.resetCounter();
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Container(
+                          height: MediaQuery.sizeOf(context).height * .07,
+                          width: MediaQuery.sizeOf(context).width * .15,
+                          decoration: const BoxDecoration(
+                            color: ColorManager.browen,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Text(
+                            "${cubit.sets}",
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium!
+                                .copyWith(
+                                  color: ColorManager.browenDark,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                ),
                           ),
                         ),
-                      )),
-                  SizedBox(
-                    height: MediaQuery.sizeOf(context).height * .15,
+                      ),
+                    ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          cubit.sebhaCounter();
-                        },
-                        child: Container(
-                            height: MediaQuery.sizeOf(context).height * .15,
-                            width: MediaQuery.sizeOf(context).width * .3,
-                            decoration: BoxDecoration(
-                              color: ColorManager.darkGrey,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: Align(
-                              alignment: Alignment.topCenter,
-                              child: Text(
-                                "سبح",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineLarge!
-                                    .copyWith(
-                                      color: ColorManager.white,
-                                    ),
-                              ),
-                            )),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     cubit.sebhaCounter();
+                  //   },
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  //     child: Container(
+                  //       height: MediaQuery.sizeOf(context).height * .3,
+                  //       width: double.infinity,
+                  //       decoration: const BoxDecoration(
+                  //         color: ColorManager.browen,
+                  //         // borderRadius: BorderRadius.circular(30),
+                  //         shape: BoxShape.circle,
+                  //       ),
+                  //       child: Center(
+                  //         child: Text(
+                  //           '${cubit.counter}/33',
+                  //           style: Theme.of(context)
+                  //               .textTheme
+                  //               .headlineLarge!
+                  //               .copyWith(
+                  //                 color: ColorManager.browenDark,
+                  //                 fontSize: 40,
+                  //                 fontWeight: FontWeight.bold,
+                  //               ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  GestureDetector(
+                    onTap: () {
+                      cubit.sebhaCounter();
+                    },
+                    child: CircularPercentIndicator(
+                      radius: MediaQuery.sizeOf(context).width * .3,
+                      animation: false,
+                      animationDuration: 1200,
+                      lineWidth: 15.0,
+                      percent: cubit.percentage,
+                      center: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 7.0),
+                    child: Container(
+                      // height: MediaQuery.sizeOf(context).height * .6,
+                      // width: MediaQuery.sizeOf(context).width * .73,
+                      decoration: const BoxDecoration(
+                        color: ColorManager.browen,
+                        shape: BoxShape.circle,
                       ),
-                      SizedBox(
-                        width: MediaQuery.sizeOf(context).width * .04,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          cubit.resetCounter();
-                        },
-                        child: Container(
-                            alignment: Alignment.bottomCenter,
-                            height: MediaQuery.sizeOf(context).height * .05,
-                            width: MediaQuery.sizeOf(context).width * .1,
-                            decoration: BoxDecoration(
-                              color: ColorManager.darkGreen,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: const Center(
-                                child: Icon(
-                              Icons.replay_rounded,
-                              color: ColorManager.white,
-                            ))),
-                      ),
-                    ],
+                      child: Center(
+                        child: Text(
+                          '${cubit.counter}/33',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge!
+                              .copyWith(
+                            color: ColorManager.browenDark,
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),),),
+                      circularStrokeCap: CircularStrokeCap.round,
+                      backgroundColor: ColorManager.browen,
+                      progressColor: ColorManager.browenDark,
+                    ),
                   ),
+
+                  GestureDetector(
+                    onTap: () {
+                      cubit.resetCounter();
+                    },
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Container(
+                        height: MediaQuery.sizeOf(context).height * .05,
+                        width: MediaQuery.sizeOf(context).width * .2,
+                        decoration: const BoxDecoration(
+                          color: ColorManager.browen,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.refresh_outlined,
+                          color: ColorManager.browenDark,
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),

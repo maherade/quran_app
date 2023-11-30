@@ -97,7 +97,7 @@ class AppCubit extends Cubit<AppState> {
   // }
 
   AudioModel? audioModel;
-  List<Surahs> audioContent = [];
+  List<AudioData> audioContent = [];
 
   Future<dynamic> getAudio() async {
     audioContent = [];
@@ -109,16 +109,17 @@ class AppCubit extends Cubit<AppState> {
         // print("///////////");
         //           value.data['items'].forEach((element) {
         //             ahadethItems.add(Items.fromJson(element));
-        print("-----------------------------${value.data}");
-        value.data!['surahs'].forEach((element) {
-          audioContent.add(Surahs.fromJson(element));
+        print('hiiiiii');
+        print(value.data);
+        value.data!['data'].forEach((element) {
+          audioContent.add(AudioData.fromJson(element));
+          print("///${audioContent[0]}");
         });
         emit(GetAudioSuccessState());
       } catch (e) {
         emit(GetAudioErrorState());
         print("*****${e.toString()}");
       }
-      ;
     });
   }
 
@@ -157,6 +158,8 @@ class AppCubit extends Cubit<AppState> {
 
   int currentIndex = 0;
   int counter = 0;
+  int sets = 0;
+  double percentage = 0.0;
   List<String> tasbehList = [
     "سبحان الله",
     "الحمد لله",
@@ -165,12 +168,15 @@ class AppCubit extends Cubit<AppState> {
 
   sebhaCounter() {
     counter++;
+    percentage+=.030303030303;
     print(counter);
     emit(ChangeCounterState());
-    if (counter == 31) {
+    if (counter == 33 || percentage==999.999) {
       currentIndex++;
+      sets++;
       emit(ChangeCounterState());
       counter = 0;
+      percentage=0.0;
       emit(ChangeCounterState());
     }
     if (currentIndex > tasbehList.length - 1) {
@@ -180,6 +186,8 @@ class AppCubit extends Cubit<AppState> {
   }
   resetCounter() {
     counter = 0;
+    sets=0;
+    percentage=0.0;
     emit(ChangeCounterState());
   }
 

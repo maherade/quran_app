@@ -44,13 +44,12 @@ dependencies:
   flutter_native_splash: ^2.2.17
   shared_preferences: ^2.1.2
   google_fonts: ^6.1.0
-  animated_flip_counter: ^0.2.6
   flutter_qiblah: ^2.2.0
   cached_network_image: ^3.3.0
   expansion_tile_card: ^3.0.0
   flutter_compass: ^0.7.0
-  flutter_animate: ^4.3.0
   flutter_svg: ^2.0.9
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:
