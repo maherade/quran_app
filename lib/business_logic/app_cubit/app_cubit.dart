@@ -209,6 +209,18 @@ class AppCubit extends Cubit<AppState> {
     "الله أكبر",
   ];
 
+  List<String> countryList = [
+    "مصر , القاهره",
+    "لبنان , بيروت",
+    "السعوديه , الرياض",
+    "فلسطين , غزه",
+    "العراق , بغداد",
+    "ليبيا , طرابلس",
+    "السودان , الخرطوم",
+    "قطر , الدوحة",
+    "عُمان , مسقط",
+  ];
+
   // sebhaCounter() {
   //   counter++;
   //   print(counter);
@@ -286,8 +298,8 @@ class AppCubit extends Cubit<AppState> {
   PrayModel? prayModel;
 
   Future<void> getPrayTimes({
-    String city ='cairo',
-    String  country='egypt',
+    String city ='gaza',
+    String  country='palestine',
   })
   async{
     emit(GetPrayTimesLoadingState());
