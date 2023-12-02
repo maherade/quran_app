@@ -18,6 +18,7 @@ import 'package:islami_app/presentation/screens/qebla_screen/qebla_screen.dart';
 import 'package:islami_app/presentation/screens/quran_screen/quran_screen.dart';
 import 'package:islami_app/presentation/screens/rasol_life_screen/rasol_life_screen.dart';
 import 'package:islami_app/presentation/screens/tasbeeh_screen/tasbeeh_screen.dart';
+import 'package:islami_app/utiles/local/cash_helper.dart';
 import 'package:islami_app/utiles/remote/ahadeth_dio_helper.dart';
 import 'package:islami_app/utiles/remote/audio_dio_helper.dart';
 import 'package:islami_app/utiles/remote/azkar_dio_helper.dart';
@@ -427,5 +428,118 @@ class AppCubit extends Cubit<AppState> {
     Colors.brown,
     Colors.lightGreen
   ];
+
+  int indexValue=3;
+  void changeCountry(BuildContext context,int index){
+    if(index==0){
+     indexValue=0;
+      getPrayTimes(
+        country: 'egypt',
+        city: 'cairo ',
+      ).then((value){
+        CashHelper.saveData(key: 'country', value:'egypt');
+        Navigator.pop(context);
+        emit(ChangeCountrySuccessState());
+      });
+    }
+    else if(index==1){
+      indexValue=1;
+      getPrayTimes(
+        country: 'Lebanon',
+        city: 'Beirut',
+      ).then((value){
+        CashHelper.saveData(key: 'country', value:'Lebanon');
+
+        Navigator.pop(context);
+        emit(ChangeCountrySuccessState());
+      });
+
+    }
+    else if(index==2){
+      indexValue=2;
+      getPrayTimes(
+        country: 'Saudi Arabia',
+        city: 'Riyadh',
+      ).then((value){
+        CashHelper.saveData(key: 'country', value:'Saudi Arabia');
+
+        Navigator.pop(context);
+        emit(ChangeCountrySuccessState());
+      });
+
+    }
+    else if(index==3){
+      indexValue=3;
+     getPrayTimes(
+        country: 'palestine',
+        city: 'gaza',
+      ).then((value){
+       CashHelper.saveData(key: 'country', value:'palestine');
+
+       Navigator.pop(context);
+       emit(ChangeCountrySuccessState());
+     });
+
+    }
+    else if(index==4){
+      indexValue=4;
+      getPrayTimes(
+        country: 'Iraq',
+        city: 'Baghdad',
+      ).then((value){
+        CashHelper.saveData(key: 'country', value:'Iraq');
+        Navigator.pop(context);
+        emit(ChangeCountrySuccessState());
+      });
+
+    }
+    else if(index==5){
+      indexValue=5;
+      getPrayTimes(
+        country: 'Libya',
+        city: 'Tripoli',
+      ).then((value){
+        CashHelper.saveData(key: 'country', value:'Libya');
+        Navigator.pop(context);
+        emit(ChangeCountrySuccessState());
+      });
+
+    }
+    else if(index==6){
+      indexValue=6;
+      getPrayTimes(
+        country: 'Sudan',
+        city: 'Khartoum',
+      ).then((value){
+        CashHelper.saveData(key: 'country', value:'Sudan');
+        Navigator.pop(context);
+        emit(ChangeCountrySuccessState());
+      });
+
+    }
+    else if(index==7){
+     indexValue=7;
+     getPrayTimes(
+        country: 'Qatar',
+        city: 'Doha',
+      ).then((value){
+       CashHelper.saveData(key: 'country', value:'Qatar');
+       Navigator.pop(context);
+       emit(ChangeCountrySuccessState());
+     });
+    }
+    else{
+      indexValue=8;
+      print(indexValue);
+      getPrayTimes(
+        country: 'Oman',
+        city: 'Muscat',
+      ).then((value){
+        CashHelper.saveData(key: 'country', value:'Oman');
+        Navigator.pop(context);
+        emit(ChangeCountrySuccessState());
+      });
+    }
+  }
 
 }

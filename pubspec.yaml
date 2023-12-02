@@ -51,6 +51,7 @@ dependencies:
   flutter_svg: ^2.0.9
   percent_indicator: ^4.2.3
   audioplayers: ^5.2.1
+  admob_flutter: ^3.0.0
 
 dev_dependencies:
   flutter_test:

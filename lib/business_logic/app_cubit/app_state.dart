@@ -32,3 +32,5 @@ class GetPrayTimesLErrorState extends AppState {}
 class GetAhadethLoadingState extends AppState {}
 class GetAhadethSuccessState extends AppState {}
 class GetAhadethErrorState extends AppState {}
+
+class ChangeCountrySuccessState extends AppState {}

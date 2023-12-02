@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:islami_app/business_logic/app_cubit/app_cubit.dart';
+import 'package:islami_app/presentation/screens/prayer_times/widgets/countries_bottom_sheet.dart';
 import 'package:islami_app/styles/color_manager.dart';
-import 'package:islami_app/widgets/side_menu.dart';
 
 class PrayerTimes extends StatefulWidget {
   const PrayerTimes({super.key});
@@ -41,7 +41,6 @@ class _PrayerTimesState extends State<PrayerTimes> {
           var cubit=AppCubit.get(context);
           List<String> prayTimesList=[];
           String prayName='';
-          int indexValue=3;
           String nextPrayTime='';
 
           if(cubit.prayModel !=null){
@@ -87,8 +86,6 @@ class _PrayerTimesState extends State<PrayerTimes> {
           }
 
           return Scaffold(
-
-
             body: cubit.prayModel !=null?
             Container(
               decoration: const BoxDecoration(
@@ -103,11 +100,9 @@ class _PrayerTimesState extends State<PrayerTimes> {
                   SizedBox(height: MediaQuery.of(context).size.height*.04),
                   SizedBox(
                     height: MediaQuery.of(context).size.height*.32,
-
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-
                         /// row [city - country]
                         GestureDetector(
                           onTap: (){
@@ -121,133 +116,7 @@ class _PrayerTimesState extends State<PrayerTimes> {
                                 ),
                                 context: context,
                                 builder: (context){
-                                  return  Container(
-                                    height: MediaQuery.of(context).size.height*.6,
-                                    width: double.infinity,
-                                    child: Column(
-                                      children: [
-                                        SizedBox(height: MediaQuery.of(context).size.height*.02,),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(20),
-                                            color: ColorManager.textColor,
-                                          ),
-                                          height: MediaQuery.of(context).size.height*.01,
-                                          width: MediaQuery.of(context).size.width*.6,
-
-                                        ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 20,
-                                              vertical: 15
-                                            ),
-                                            child: ListView.separated(
-                                                itemBuilder: (context,index){
-                                                  return GestureDetector(
-                                                    onTap: (){
-                                                      if(index==0){
-                                                        indexValue=0;
-                                                        cubit.getPrayTimes(
-                                                          country: 'egypt',
-                                                          city: 'cairo ',
-                                                        ).then((value){
-                                                          Navigator.pop(context);
-                                                        });
-                                                      }
-                                                      else if(index==1){
-                                                        indexValue=1;
-                                                        cubit.getPrayTimes(
-                                                          country: 'Lebanon',
-                                                          city: 'Beirut',
-                                                        ).then((value){
-                                                          Navigator.pop(context);
-                                                        });
-                                                      }
-                                                      else if(index==2){
-                                                        indexValue=2;
-                                                        cubit.getPrayTimes(
-                                                          country: 'Saudi Arabia',
-                                                          city: 'Riyadh',
-                                                        ).then((value){
-                                                          Navigator.pop(context);
-                                                        });
-                                                      }
-                                                      else if(index==3){
-                                                        indexValue=3;
-                                                        cubit.getPrayTimes(
-                                                          country: 'palestine',
-                                                          city: 'gaza',
-                                                        ).then((value){
-                                                          Navigator.pop(context);
-                                                        });
-                                                      }
-                                                      else if(index==4){
-                                                        indexValue=4;
-                                                        cubit.getPrayTimes(
-                                                          country: 'Iraq',
-                                                          city: 'Baghdad',
-                                                        ).then((value){
-                                                          Navigator.pop(context);
-                                                        });
-                                                      }
-                                                      else if(index==5){
-                                                        indexValue=5;
-                                                        cubit.getPrayTimes(
-                                                          country: 'Libya',
-                                                          city: 'Tripoli',
-                                                        ).then((value){
-                                                          Navigator.pop(context);
-                                                        });
-                                                      }
-                                                      else if(index==6){
-                                                        indexValue=6;
-                                                        cubit.getPrayTimes(
-                                                          country: 'Sudan',
-                                                          city: 'Khartoum',
-                                                        ).then((value){
-                                                          Navigator.pop(context);
-                                                        });
-                                                      }
-                                                      else if(index==7){
-                                                        indexValue=7;
-                                                        cubit.getPrayTimes(
-                                                          country: 'Qatar',
-                                                          city: 'Doha',
-                                                        ).then((value){
-                                                          Navigator.pop(context);
-                                                        });
-                                                      }
-                                                      else{
-                                                        setState(() {
-                                                          indexValue=8;
-                                                          print(indexValue);
-                                                        });
-                                                        cubit.getPrayTimes(
-                                                          country: 'Oman',
-                                                          city: 'Muscat',
-                                                        ).then((value){
-                                                          Navigator.pop(context);
-                                                        });
-                                                      }
-
-                                                    },
-                                                    child: Text(cubit.countryList[index],style: TextStyle(
-                                                        color: ColorManager.white,
-                                                        fontSize: MediaQuery.of(context).size.height*.025
-                                                    ),),
-                                                  );
-                                                },
-                                                separatorBuilder: (context,index){
-                                                  return const SizedBox(height: 10,);
-                                                },
-                                                itemCount: cubit.countryList.length
-                                            ),
-                                          ),
-                                        )
-                                      ]
-                                    ),
-                                  );
+                                  return  const CountriesBottomSheet();
                                 }
                             );
                           },
@@ -257,8 +126,8 @@ class _PrayerTimesState extends State<PrayerTimes> {
                               top: MediaQuery.of(context).size.height*.07,
                               // left: MediaQuery.of(context).size.height*.04,
                               child: Container(
-                                margin: EdgeInsets.fromLTRB( MediaQuery.of(context).size.height*.02,MediaQuery.of(context).size.height*.03, 0, 0),
-                                width: MediaQuery.of(context).size.height*.15,
+                                margin: EdgeInsets.fromLTRB( MediaQuery.of(context).size.height*.02,MediaQuery.of(context).size.height*.02, 0, 0),
+                                width: MediaQuery.of(context).size.height*.17,
                                 padding: EdgeInsets.symmetric(
                                     vertical: MediaQuery.of(context).size.height*.0,
                                     horizontal: MediaQuery.of(context).size.height*.02
@@ -276,7 +145,7 @@ class _PrayerTimesState extends State<PrayerTimes> {
                                     ),
 
                                     Text(
-                                      cubit.countryList[indexValue],
+                                      cubit.countryList[cubit.indexValue],
                                       style: const TextStyle(
                                           color: ColorManager.white,
                                           fontSize: 12
@@ -289,7 +158,6 @@ class _PrayerTimesState extends State<PrayerTimes> {
                             ),
                           ),
                         ),
-
                         /// text
                         Positioned(
                           top: MediaQuery.of(context).size.height*.04,
@@ -299,7 +167,6 @@ class _PrayerTimesState extends State<PrayerTimes> {
                               color: ColorManager.primaryColor
                           ),),
                         ),
-
                         /// text [time]
                         Positioned(
                           top: MediaQuery.of(context).size.height*.13,
@@ -309,7 +176,6 @@ class _PrayerTimesState extends State<PrayerTimes> {
                               color: ColorManager.darkGrey
                           ),),
                         ),
-
                         /// text
                         Positioned(
                           top: MediaQuery.of(context).size.height*.22,
@@ -322,8 +188,6 @@ class _PrayerTimesState extends State<PrayerTimes> {
                       ],
                     ),
                   ),
-
-
                   Expanded(
                     child: Container(
                       padding: EdgeInsets.symmetric(
