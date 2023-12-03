@@ -1,7 +1,10 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:islami_app/componants/componants.dart';
 import 'package:islami_app/styles/color_manager.dart';
+
+import '../../../data/models/ads_model/ads_model.dart';
 
 class AllahNames extends StatelessWidget {
   const AllahNames({super.key});
@@ -234,58 +237,72 @@ class AllahNames extends StatelessWidget {
             ),
 
             /// list
-            child: ListView.separated(
-                itemBuilder: (context,index){
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView.separated(
+                      itemBuilder: (context,index){
+                        return Column(
+                          children: [
+                            Container(
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              decoration: BoxDecoration(
+                                color: ColorManager.darkGrey.withOpacity(.5),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: ExpansionTileCard(
+                                expandedColor: ColorManager.darkGrey,
+                                baseColor: ColorManager.darkGrey,
 
+                                /// title
+                                title: Text(allahNames[index],style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                                  color: ColorManager.lightColor,
+                                  fontSize: MediaQuery.of(context).size.height*.03,
+                                ),),
+                                children: <Widget>[
+                                  const Divider(
+                                    thickness: 1.0,
+                                    height: 1.0,
+                                  ),
 
-                  return Container(
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    decoration: BoxDecoration(
-                      color: ColorManager.darkGrey.withOpacity(.5),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: ExpansionTileCard(
-                      expandedColor: ColorManager.darkGrey,
-                      baseColor: ColorManager.darkGrey,
+                                  /// description
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0,
+                                        vertical: 8.0,
+                                      ),
+                                      child: Text(
+                                        allahNamesDetails[index],
+                                        style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                                            fontSize: MediaQuery.of(context).size.height*.025,
+                                            color: ColorManager.lightColor
+                                        ),
+                                      ),
+                                    ),
+                                  ),
 
-                      /// title
-                      title: Text(allahNames[index],style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                        color: ColorManager.lightColor,
-                        fontSize: MediaQuery.of(context).size.height*.03,
-                      ),),
-                      children: <Widget>[
-                        const Divider(
-                          thickness: 1.0,
-                          height: 1.0,
-                        ),
-
-                        /// description
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16.0,
-                              vertical: 8.0,
-                            ),
-                            child: Text(
-                              allahNamesDetails[index],
-                              style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                                  fontSize: MediaQuery.of(context).size.height*.025,
-                                  color: ColorManager.lightColor
+                                ],
                               ),
                             ),
-                          ),
-                        ),
+                            SizedBox(height:  MediaQuery.of(context).size.height*.01,),
+                          ],
 
-                      ],
-                    ),
-                  );
+                        );
 
-                },
-                separatorBuilder: (context,index){
-                  return SizedBox(height: MediaQuery.of(context).size.height*.02,);
-                },
-                itemCount: allahNamesDetails.length
+                      },
+                      separatorBuilder: (context,index){
+                        return SizedBox(height: MediaQuery.of(context).size.height*.02,);
+                      },
+                      itemCount: allahNamesDetails.length
+                  ),
+                ),
+                AdmobBanner(
+                    adUnitId: AdsModel.getBannerAd(),
+                    adSize: AdmobBannerSize.FULL_BANNER),
+
+              ],
             ))
     );
   }

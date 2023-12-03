@@ -1,12 +1,13 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:islami_app/business_logic/app_cubit/app_cubit.dart';
-import 'package:islami_app/componants/componants.dart';
-import 'package:islami_app/presentation/screens/quran_screen/quran_screen.dart';
-import 'package:islami_app/styles/color_manager.dart';
+ import 'package:islami_app/styles/color_manager.dart';
 
-class HomeScreen extends StatelessWidget {
+import '../../../data/models/ads_model/ads_model.dart';
+
+class HomeScreen extends StatefulWidget {
 
   static bool pinned = true;
   static bool snap = false;
@@ -16,11 +17,36 @@ class HomeScreen extends StatelessWidget {
 
   const HomeScreen({Key? key}) : super(key: key);
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    AppCubit.get(context).interstitialAd= AdmobInterstitial(
+      adUnitId: AdsModel.getInitAd(),
+      listener:(AdmobAdEvent event, Map<String, dynamic>? args) {
+        if (event == AdmobAdEvent.closed) {
+          AppCubit.get(context).interstitialAd!.load();
+        }
+      },
+
+    );
+    AppCubit.get(context).interstitialAd!.load();
+  }
+
+  @override
+  void dispose() {
+    AppCubit.get(context).interstitialAd!.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    Size size=MediaQuery.of(context).size;
-    return BlocConsumer<AppCubit,AppState>(
+     return BlocConsumer<AppCubit,AppState>(
       listener: (context,state){
 
       },
@@ -142,11 +168,18 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
 
-
                     Container(
                       color: ColorManager.darkWhite,
                       child: Column(
                         children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: AdmobBanner(
+                                adUnitId:
+                                AdsModel.getBannerAd(),
+                                adSize: AdmobBannerSize
+                                    .FULL_BANNER),
+                          ),
 
                           SizedBox(height: MediaQuery.of(context).size.height*.01,),
 
@@ -160,6 +193,7 @@ class HomeScreen extends StatelessWidget {
 
                                 GestureDetector(
                                   onTap: (){
+                                    cubit.interstitialAd!.show();
                                     Navigator.push(context, MaterialPageRoute(builder: (_){
                                       return cubit.sectionWidget[index];
                                     }));

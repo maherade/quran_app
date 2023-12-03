@@ -1,6 +1,9 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:islami_app/componants/componants.dart';
 import 'package:islami_app/styles/color_manager.dart';
+
+import '../../../data/models/ads_model/ads_model.dart';
 
 class AstakharPray extends StatelessWidget {
   const AstakharPray({super.key});
@@ -40,8 +43,14 @@ class AstakharPray extends StatelessWidget {
                 ),
 
               ),
+              SizedBox(height: MediaQuery.sizeOf(context).height * .2,),
 
-              SizedBox(height: MediaQuery.of(context).size.height*.22,),
+              Center(
+                child: AdmobBanner(
+                    adUnitId: AdsModel.getBannerAd(),
+                    adSize: AdmobBannerSize.FULL_BANNER),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height*.17,),
 
               Text('متى يحتاج الإنسان إلى صلاة الاستخارة؟',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -60,9 +69,7 @@ class AstakharPray extends StatelessWidget {
                   fontSize: MediaQuery.of(context).size.height * .025,
               ),
               ),
-
-              SizedBox(height: MediaQuery.sizeOf(context).height * .83,),
-
+              SizedBox(height: MediaQuery.of(context).size.height*.5,),
               Text('دعاء صلاة الاستخارة',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     color: ColorManager.lightColor,
@@ -81,9 +88,8 @@ class AstakharPray extends StatelessWidget {
                   fontSize: MediaQuery.of(context).size.height * .025,
                ),
               ),
+              SizedBox(height: MediaQuery.sizeOf(context).height * .5,),
 
-
-              SizedBox(height: MediaQuery.sizeOf(context).height * .84,),
 
               Text('كيفية صلاة الاستخارة',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -115,9 +121,8 @@ class AstakharPray extends StatelessWidget {
                   fontSize: MediaQuery.of(context).size.height * .025,
               ),
               ),
+              SizedBox(height: MediaQuery.sizeOf(context).height * .5,),
 
-
-              SizedBox(height: MediaQuery.sizeOf(context).height * .6,),
 
               Text('الأوقات المستحبة لصلاة الاستخارة',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -141,7 +146,8 @@ class AstakharPray extends StatelessWidget {
 
 
 
-              SizedBox(height: MediaQuery.sizeOf(context).height * .5,),
+              SizedBox(height: MediaQuery.sizeOf(context).height * .4,),
+
 
               Text('فائدة صلاة الاستخارة',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -150,9 +156,7 @@ class AstakharPray extends StatelessWidget {
                     fontWeight: FontWeight.w900
                 ),
               ),
-
               SizedBox(height: MediaQuery.of(context).size.height*.06,),
-
               Text(
                 '''
  قال عبد الله بن عمر: «إن الرجل ليستخير الله فيختار له، فيسخط على ربه، فلا يلبث أن ينظر في العاقبة فإذا هو قد خار له».
@@ -175,6 +179,13 @@ class AstakharPray extends StatelessWidget {
                   fontSize: MediaQuery.of(context).size.height * .025,
               ),
               ),
+              SizedBox(height: MediaQuery.sizeOf(context).height * .2,),
+              Center(
+                child: AdmobBanner(
+                    adUnitId: AdsModel.getBannerAd(),
+                    adSize: AdmobBannerSize.FULL_BANNER),
+              ),
+              SizedBox(height: MediaQuery.sizeOf(context).height * .1,),
             ],
           ),
         ),

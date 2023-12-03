@@ -1,3 +1,4 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islami_app/business_logic/app_cubit/app_cubit.dart';
@@ -7,9 +8,37 @@ import 'package:islami_app/presentation/screens/surah_details_screen/surah_detai
 import 'package:islami_app/styles/color_manager.dart';
 import 'package:islami_app/widgets/side_menu.dart';
 
-class QuranScreen extends StatelessWidget {
+import '../../../data/models/ads_model/ads_model.dart';
+
+class QuranScreen extends StatefulWidget {
   const QuranScreen({ super.key});
 
+  @override
+  State<QuranScreen> createState() => _QuranScreenState();
+}
+
+class _QuranScreenState extends State<QuranScreen> {
+  @override
+  void initState() {
+    super.initState();
+    AppCubit.get(context).interstitialAd= AdmobInterstitial(
+      adUnitId: AdsModel.getInitAd(),
+      listener:(AdmobAdEvent event, Map<String, dynamic>? args) {
+        if (event == AdmobAdEvent.closed) {
+          AppCubit.get(context).interstitialAd!.load();
+        }
+      },
+
+    );
+    AppCubit.get(context).interstitialAd!.load();
+
+  }
+
+  @override
+  void dispose() {
+    AppCubit.get(context).interstitialAd!.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     AppCubit.get(context).getAhadeth();
@@ -37,6 +66,7 @@ class QuranScreen extends StatelessWidget {
                           return SurahTitleRow(
                             index: index,
                             onTap: () {
+                              AppCubit.get(context).interstitialAd!.show();
                               cubit.getAyah( cubit.surahNames![index].number).then((value) {
                                 Navigator.push(
                                     context,
@@ -61,6 +91,12 @@ class QuranScreen extends StatelessWidget {
                         },
                         itemCount: cubit.surahNames!.length),
                   ),
+                  AdmobBanner(
+                      adUnitId:
+                      AdsModel.getBannerAd(),
+                      adSize: AdmobBannerSize
+                          .FULL_BANNER),
+
                 ],
               ),
             )

@@ -1,6 +1,9 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:islami_app/componants/componants.dart';
 import 'package:islami_app/styles/color_manager.dart';
+
+import '../../../data/models/ads_model/ads_model.dart';
 
 class RasolLifeScreen extends StatelessWidget {
   const RasolLifeScreen({super.key});
@@ -21,6 +24,9 @@ class RasolLifeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                AdmobBanner(
+                    adUnitId: AdsModel.getBannerAd(),
+                    adSize: AdmobBannerSize.FULL_BANNER),
                 Text(
                   "نسب النبي ومولده",
                   style: Theme.of(context).textTheme.headlineMedium!.copyWith(
@@ -466,6 +472,9 @@ class RasolLifeScreen extends StatelessWidget {
                 SizedBox(
                   height: MediaQuery.sizeOf(context).height * .02,
                 ),
+                AdmobBanner(
+                    adUnitId: AdsModel.getBannerAd(),
+                    adSize: AdmobBannerSize.FULL_BANNER),
 
 
               ],

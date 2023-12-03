@@ -1,13 +1,12 @@
-import 'package:audioplayers/audioplayers.dart';
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islami_app/componants/componants.dart';
 import 'package:islami_app/presentation/screens/surah_details_screen/widgets/surah_content_widget.dart';
 import 'package:islami_app/presentation/screens/tafseer_screen/tafseer_screen.dart';
 import 'package:islami_app/styles/color_manager.dart';
-import 'package:islami_app/widgets/lower_row.dart';
-
 import '../../../business_logic/app_cubit/app_cubit.dart';
+import '../../../data/models/ads_model/ads_model.dart';
 
 class ReadingScreen extends StatefulWidget {
   String surahName;
@@ -22,8 +21,25 @@ class ReadingScreen extends StatefulWidget {
 class _ReadingScreenState extends State<ReadingScreen> {
 
   @override
+  void initState() {
+    super.initState();
+    AppCubit.get(context).interstitialAd= AdmobInterstitial(
+      adUnitId: AdsModel.getInitAd(),
+      listener:(AdmobAdEvent event, Map<String, dynamic>? args) {
+        if (event == AdmobAdEvent.closed) {
+          AppCubit.get(context).interstitialAd!.load();
+        }
+      },
+
+    );
+    AppCubit.get(context).interstitialAd!.load();
+
+  }
+
+  @override
   void dispose() {
     AppCubit.get(context).player.pause();
+    AppCubit.get(context).interstitialAd!.dispose();
     super.dispose();
   }
 
@@ -40,7 +56,8 @@ class _ReadingScreenState extends State<ReadingScreen> {
               backgroundColor: ColorManager.darkGrey,
               appBar: defaultAppBar(
                 title: widget.surahName,
-                isSideMenuShawn: true, context: context,
+                isSideMenuShawn: true,
+                context: context,
               ),
 
               body: cubit.ayahContent!.isEmpty
@@ -75,8 +92,12 @@ class _ReadingScreenState extends State<ReadingScreen> {
                       },
                     ),
                   ),
+                  AdmobBanner(
+                      adUnitId: AdsModel.getBannerAd(),
+                      adSize: AdmobBannerSize.BANNER),
+
                   Container(
-                    margin: EdgeInsets.all(5),
+                    margin: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         color: ColorManager.browenDark,
                         borderRadius: BorderRadius.circular(15),

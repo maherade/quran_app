@@ -1,9 +1,12 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:islami_app/business_logic/app_cubit/app_cubit.dart';
 import 'package:islami_app/presentation/screens/prayer_times/widgets/countries_bottom_sheet.dart';
 import 'package:islami_app/styles/color_manager.dart';
+
+import '../../../data/models/ads_model/ads_model.dart';
 
 class PrayerTimes extends StatefulWidget {
   const PrayerTimes({super.key});
@@ -129,7 +132,7 @@ class _PrayerTimesState extends State<PrayerTimes> {
                                 margin: EdgeInsets.fromLTRB( MediaQuery.of(context).size.height*.02,MediaQuery.of(context).size.height*.02, 0, 0),
                                 width: MediaQuery.of(context).size.height*.17,
                                 padding: EdgeInsets.symmetric(
-                                    vertical: MediaQuery.of(context).size.height*.0,
+                                    vertical: MediaQuery.of(context).size.height*.01,
                                     horizontal: MediaQuery.of(context).size.height*.02
                                 ),
                                 decoration: BoxDecoration(
@@ -137,6 +140,7 @@ class _PrayerTimesState extends State<PrayerTimes> {
                                     color: ColorManager.darkGrey.withOpacity(.5)
                                 ),
                                 child:  Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     const Icon(
                                       Icons.location_pin,
@@ -268,6 +272,11 @@ class _PrayerTimesState extends State<PrayerTimes> {
                                 itemCount: PrayerTimes.prayTimesName.length
                             ),
                           ),
+                          AdmobBanner(
+                              adUnitId:
+                              AdsModel.getBannerAd(),
+                              adSize: AdmobBannerSize
+                                  .FULL_BANNER),
                         ],
                       ),
 

@@ -1,3 +1,4 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islami_app/business_logic/app_cubit/app_cubit.dart';
@@ -5,6 +6,8 @@ import 'package:islami_app/componants/componants.dart';
 import 'package:islami_app/presentation/screens/azkar_screens/widgets/azkar_content.dart';
 import 'package:islami_app/styles/color_manager.dart';
 import 'package:islami_app/widgets/side_menu.dart';
+
+import '../../../../data/models/ads_model/ads_model.dart';
 
 class AzkarAlsabah extends StatelessWidget {
 
@@ -30,6 +33,7 @@ class AzkarAlsabah extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(height: MediaQuery.of(context).size.height*.02,),
+
                     Expanded(
                       child: ListView.separated(
                           itemBuilder: (context,index){
@@ -42,6 +46,15 @@ class AzkarAlsabah extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height*.02,),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: AdmobBanner(
+                          adUnitId:
+                          AdsModel.getBannerAd(),
+                          adSize: AdmobBannerSize
+                              .FULL_BANNER),
+                    ),
+
 
                   ],
                 ),

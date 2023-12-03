@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:math' show pi;
 
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_qiblah/flutter_qiblah.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:islami_app/data/models/ads_model/ads_model.dart';
 import 'package:islami_app/presentation/screens/qebla_screen/widgets/location_error_widget.dart';
 import 'package:islami_app/presentation/screens/qebla_screen/widgets/qeblah_indicator.dart';
 
@@ -17,7 +19,7 @@ class QiblahCompass extends StatefulWidget {
 
 class QiblahCompassState extends State<QiblahCompass> {
   final _locationStreamController =
-  StreamController<LocationStatus>.broadcast();
+      StreamController<LocationStatus>.broadcast();
 
   Stream<LocationStatus> get stream => _locationStreamController.stream;
 
@@ -61,11 +63,11 @@ class QiblahCompassState extends State<QiblahCompass> {
                   error: "Location service Denied Forever !",
                   callback: _checkLocationStatus,
                 );
-            // case GeolocationStatus.unknown:
-            //   return LocationErrorWidget(
-            //     error: "Unknown Location service error",
-            //     callback: _checkLocationStatus,
-            //   );
+              // case GeolocationStatus.unknown:
+              //   return LocationErrorWidget(
+              //     error: "Unknown Location service error",
+              //     callback: _checkLocationStatus,
+              //   );
               default:
                 return const SizedBox();
             }
@@ -94,7 +96,7 @@ class QiblahCompassState extends State<QiblahCompass> {
 }
 
 class QiblahCompassWidget extends StatelessWidget {
-const QiblahCompassWidget({super.key});
+  const QiblahCompassWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -125,9 +127,19 @@ const QiblahCompassWidget({super.key});
               ),
             ),
             Positioned(
-              bottom: MediaQuery.sizeOf(context).height * 0.01,
+              bottom: MediaQuery.sizeOf(context).height * 0.1,
               child: Text("${qiblahDirection.offset.toStringAsFixed(3)}°"),
-            )
+            ),
+            Positioned(
+              bottom: MediaQuery.sizeOf(context).height * 0.01,
+
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10),
+                child: AdmobBanner(
+                    adUnitId: AdsModel.getBannerAd(),
+                    adSize: AdmobBannerSize.BANNER),
+              ),
+            ),
           ],
         );
       },

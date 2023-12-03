@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -541,5 +542,8 @@ class AppCubit extends Cubit<AppState> {
       });
     }
   }
+
+  AdmobBannerSize? bannerSize;
+  AdmobInterstitial? interstitialAd;
 
 }

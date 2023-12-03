@@ -1,3 +1,4 @@
+ import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,9 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:islami_app/business_logic/app_cubit/app_cubit.dart';
-import 'package:islami_app/presentation/screens/home_screen/home_screen.dart';
-import 'package:islami_app/presentation/screens/prayer_times/prayer_times.dart';
-import 'package:islami_app/presentation/screens/quran_screen/quran_screen.dart';
 import 'package:islami_app/presentation/screens/splash_screen/splash_screen.dart';
 import 'package:islami_app/styles/color_manager.dart';
 import 'package:islami_app/utiles/local/cash_helper.dart';
@@ -23,6 +21,7 @@ import 'utiles/remote/pray_dio_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Admob.initialize();
   await CashHelper.init();
   await DioHelper.dioInit();
   await TafseerDioHelper.dioInit();
